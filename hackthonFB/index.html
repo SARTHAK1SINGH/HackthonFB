@@ -67,9 +67,62 @@
                 font-size: 40px;
             }
         }
-    </style>
-    
+		
+	#snackbar {
+	  visibility: hidden;
+	  min-width: 250px;
+	  margin-left: -125px;
+	  background-color: black;
+	  color: #fff;
+	  text-align: center;
+	  border-radius: 10px;
+	  padding: 16px;
+	  position: fixed;
+	  z-index: 1;
+	  left: 80%;
+	  bottom: 30px;
+	  font-size: 15px;
+	}
+
+	#snackbar.show {
+	  visibility: visible;
+	  -webkit-animation: fadein 0.5s, fadeout 0.5s 10s;
+	  animation: fadein 0.5s, fadeout 0.5s 10s;
+	}
+
+	@-webkit-keyframes fadein {
+	  from {bottom: 0; opacity: 0;} 
+	  to {bottom: 30px; opacity: 1;}
+	}
+
+	@keyframes fadein {
+	  from {bottom: 0; opacity: 0;}
+	  to {bottom: 30px; opacity: 1;}
+	}
+
+	@-webkit-keyframes fadeout {
+	  from {bottom: 30px; opacity: 1;} 
+	  to {bottom: 0; opacity: 0;}
+	}
+
+	@keyframes fadeout {
+	  from {bottom: 30px; opacity: 1;}
+	  to {bottom: 0; opacity: 0;}
+	}
+	</style>
+	   
+
+
+ 
 </head>
+<script>
+	function myFunction() {
+	  var x = document.getElementById("snackbar");
+	  x.className = "show";
+	  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 20000);
+	}
+</script>
+
 <body>
     <div class="landing-page">
         <div class="header">
@@ -84,11 +137,16 @@
                     <label for="exampleInputPassword1">Medicine</label>
                     <input type="text" class="form-control" id="Medicine" placeholder="Enter your Medicine">
                     </div>
-                    <button type="submit" class="btn btn-primary">Analyze</button>
+                    <button type="button" onclick="myFunction()" class="btn btn-primary" >Analyze</button>
                 </div>
             </form>    
         </div>
     </div>
 
+	<div id="snackbar">
+		<div class="spinner-border spinner-border-sm text-warning" role="status">
+		  <span class="sr-only">Loading...</span> 
+		</div> Analyzing 2 million reviews, might take some time
+	</div>
 </body>
 </html>
