@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/2f32e53da2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Yet to be named</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Share+Tech+Mono&display=swap');
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .landing-page
+        {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(
+                135deg,
+                rgba(0,64,77,0.9) 0%,
+                rgba(0,0,0,0.8) 100%
+            ),
+            url("background.png") center no-repeat;
+            background-size: contain;
+            position: relative;
+        }
+        .header{
+            height: 100vh;
+            color: white;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Share Tech Mono", monospace;
+        }
+        .title{
+            margin-bottom: 80px;
+            font-size: 45px;
+            letter-spacing: 2px;
+            font-family: fantasy;
+            background: linear-gradient(
+            to right,
+            rgba(249,105,14,1) 0%,
+            rgba(102,51,153,1) 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .formbox{
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="landing-page">
+        <div class="header">
+            <form>
+                <h1 class="title"><i class="fa fa-hospital-o" aria-hidden="true"></i> Medical Help <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
+                <div class="formbox">
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Disease</label>
+                    <input type="text" class="form-control" id="Disease"  placeholder="Enter your Disease">
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleInputPassword1">Medicine</label>
+                    <input type="text" class="form-control" id="Medicine" placeholder="Enter your Medicine">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Analyze</button>
+                </div>
+            </form>    
+        </div>
+    </div>
+
+</body>
+</html>
