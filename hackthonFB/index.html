@@ -6,7 +6,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2f32e53da2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+    
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="logo.png">
     <title>Yet to be named</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Share+Tech+Mono&display=swap');
@@ -14,6 +21,7 @@
             margin: 0;
             padding: 0;
             background-color: black;
+            color: rgb(250, 239, 221);
         }
         .landing-page
         {
@@ -38,7 +46,7 @@
             font-family: "Share Tech Mono", monospace;
         }
         .title{
-            margin-bottom: 80px;
+            margin-bottom: 50px;
             font-size: 80px;
             letter-spacing: 2px;
             font-family: fantasy;
@@ -55,6 +63,61 @@
             padding: 30px;
             border-radius: 10px;
         }
+		
+        #snackbar {
+          visibility: hidden;
+          margin-left: -125px;
+          background-color: black;
+          color: #fff;
+          text-align: center;
+          border-radius: 10px;
+          padding: 16px;
+          position: fixed;
+          z-index: 1;
+          left: 80%;
+          bottom: 30px;
+          font-size: 15px;
+        }
+
+        #snackbar.show {
+          visibility: visible;
+          -webkit-animation: fadein 0.5s, fadeout 0.5s 10s;
+          animation: fadein 0.5s, fadeout 0.5s 10s;
+        }
+
+        @-webkit-keyframes fadein {
+          from {bottom: 0; opacity: 0;} 
+          to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+          from {bottom: 0; opacity: 0;}
+          to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+          from {bottom: 30px; opacity: 1;} 
+          to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+          from {bottom: 30px; opacity: 1;}
+          to {bottom: 0; opacity: 0;}
+        }
+        .autocomplete {
+          position: relative;
+          display: inline-block;
+        }
+        .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            /* add padding to account for vertical scrollbar */
+            padding-right: 20px;
+            color: rgb(228, 218, 203);
+            background-color: rgb(0, 0, 0);
+        }
         @media (max-width: 665px)
         {
             .title{
@@ -67,54 +130,12 @@
                 font-size: 40px;
             }
         }
-		
-	#snackbar {
-	  visibility: hidden;
-	  min-width: 250px;
-	  margin-left: -125px;
-	  background-color: black;
-	  color: #fff;
-	  text-align: center;
-	  border-radius: 10px;
-	  padding: 16px;
-	  position: fixed;
-	  z-index: 1;
-	  left: 80%;
-	  bottom: 30px;
-	  font-size: 15px;
-	}
-
-	#snackbar.show {
-	  visibility: visible;
-	  -webkit-animation: fadein 0.5s, fadeout 0.5s 10s;
-	  animation: fadein 0.5s, fadeout 0.5s 10s;
-	}
-
-	@-webkit-keyframes fadein {
-	  from {bottom: 0; opacity: 0;} 
-	  to {bottom: 30px; opacity: 1;}
-	}
-
-	@keyframes fadein {
-	  from {bottom: 0; opacity: 0;}
-	  to {bottom: 30px; opacity: 1;}
-	}
-
-	@-webkit-keyframes fadeout {
-	  from {bottom: 30px; opacity: 1;} 
-	  to {bottom: 0; opacity: 0;}
-	}
-
-	@keyframes fadeout {
-	  from {bottom: 30px; opacity: 1;}
-	  to {bottom: 0; opacity: 0;}
-	}
 	</style>
-	   
 
 
- 
-</head>
+	<script src="medicine.js" ></script> 
+  <script src="disease.js" ></script> 
+
 <script>
 	function myFunction() {
 	  var x = document.getElementById("snackbar");
@@ -123,19 +144,21 @@
 	}
 </script>
 
+
+
 <body>
     <div class="landing-page">
         <div class="header">
-            <form>
+            <form autocomplete="off">
                 <h1 class="title"><i class="fa fa-hospital-o" aria-hidden="true"></i> Medical Help <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
                 <div class="formbox">
-                    <div class="form-group">
+                    <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">Disease</label>
-                    <input type="text" class="form-control" id="Disease"  placeholder="Enter your Disease">
+                    <input type="text" class="form-control" id="disease"  placeholder="Enter your Disease">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group autocomplete">
                     <label for="exampleInputPassword1">Medicine</label>
-                    <input type="text" class="form-control" id="Medicine" placeholder="Enter your Medicine">
+                    <input type="text" class="form-control" id="medicine" placeholder="Enter your Medicine">
                     </div>
                     <button type="button" onclick="myFunction()" class="btn btn-primary" >Analyze</button>
                 </div>
