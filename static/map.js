@@ -1,10 +1,6 @@
 
 
- function myFunction() {
-    var x = document.getElementById("snackbar");
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 20000);
-  }
+
 
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
