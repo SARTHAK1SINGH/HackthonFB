@@ -1,4 +1,4 @@
-
+ 
 function autocomplete(inp, arr) {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -110,4 +110,3 @@ var medicine=['Clove', 'Motofen', 'Hemin', 'Rifampin', 'Hydrocortisone', 'Lamict
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("Disease"), disease);
 autocomplete(document.getElementById("Medicine"), medicine);
-
