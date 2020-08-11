@@ -57,11 +57,16 @@
             </form>    
         </div>
     </div>
+	{{answer}}
+<h3>Your mentioned Disease can be cured by following drugs: </h3>
     {% for i in d %}
       <li>  {{i}} </li>
     {% endfor %}
-	{{answer}}
-    {{length}}
+<h3>Your mentioned Medicines can cure the following disease: </h3>
+    {% for i in c %}
+      <li>  {{i}} </li>
+    {% endfor %}
+ 
 	<div id="snackbar">
 		<div class="spinner-border spinner-border-sm text-warning" role="status">
 		  <span class="sr-only">Loading...</span> 
