@@ -15,9 +15,12 @@ def home():
 		#     if i == drug:
 		#         d.append(my_conditions[i])
 		#render_template('result.html', data1, data2, data3)
+		c = []
 		for i in range(len(disease)):
-			if(disease[i] == condition and rating[i] > 8):
+			if(disease[i] == condition and rating[i] > 7):
 				d.append(drug[i])
+			if(drugs == drug[i] and rating[i] > 7):
+				c.append(disease[i])
 		d = list(set(d))
 		from statistics import mean 
 		medicine = drugs
@@ -45,10 +48,9 @@ def home():
 		for ii in range(len(suitable_rating)):
 			x = {"label": user_id[ii], "y": suitable_rating[ii]}
 			bar_chart_data.append(x)		
-		return render_template('index.html',d = d, length = len(disease), answer = answer, bar_chart_data = bar_chart_data, suitable_rating = suitable_rating, user_id = user_id)
+		return render_template('index.html',d = d, length = len(disease), answer = answer, bar_chart_data = bar_chart_data, suitable_rating = suitable_rating, user_id = user_id, c = c)
 
 
 
 if __name__=='__main__':
-	app.run(debug=True)    
-
+	socketio.run(app)    
