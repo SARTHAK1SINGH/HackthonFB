@@ -18,26 +18,50 @@
 
 <body>
     <div class="landing-page">
+	<nav class="navbar navbar-expand-lg navbar-dark">
+  <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="#">Cure-Mate<i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+			  <li class="nav-item active">
+				<a class="nav-link" href="#">History</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#">Help</a>
+			  </li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0">
+			  <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" style ="border:none">SignIn</button>
+			</form>
+		  </div>
+		</nav>
         <div class="header">
-            <form autocomplete="off">
-                <h1 class="title"><i class="fa fa-hospital-o" aria-hidden="true"></i> Medical Help <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
+            <form autocomplete="off" method = "POST" action = "/" >
+                <h1 class="title"><i class="fa fa-hospital-o" aria-hidden="true"></i> Cure Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
                 <div class="formbox">
                     
                     <div class="form-group autocomplete">
                     <label for="Disease">Disease</label>
-                    <input type="text" class="form-control" id="Disease"  placeholder="Enter your Disease">
+                    <input type="text" class="form-control" id="Disease"  placeholder="Enter your Disease" name ="condition">
                     </div>
                     
                     <div class="form-group autocomplete">
                     <label for="Medicine">Medicine</label>
-                    <input type="text" class="form-control" id="Medicine" placeholder="Enter your Medicine">
+                    <input type="text" class="form-control" id="Medicine" placeholder="Enter your Medicine" name = "drug">
                     </div>
-                    <button type="button" onclick="myFunction()" class="btn btn-primary" >Analyze</button>
+                    <button type="submit" onclick="myFunction()" class="btn btn-primary" >Analyze</button>
                 </div>
             </form>    
         </div>
     </div>
-
+    {% for i in d %}
+      <li>  {{i}} </li>
+    {% endfor %}
+	{{answer}}
+    {{length}}
 	<div id="snackbar">
 		<div class="spinner-border spinner-border-sm text-warning" role="status">
 		  <span class="sr-only">Loading...</span> 
@@ -52,10 +76,11 @@
   }
 </script>
 
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
-<!--suggestion box code-->
- <script type="text/javascript"
-         src="{{ url_for('static', filename='map.js') }}"></script>
+
 
 </body>
 </html>
