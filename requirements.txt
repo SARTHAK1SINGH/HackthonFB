@@ -1,2 +1,4 @@
 Flask==1.0.2
 Flask-SQLAlchemy==2.4.0
+pandas
+Flask-Dance
