@@ -20,8 +20,8 @@ os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 
 ## data preprocessing calculations
 
-df_train = pd.read_csv("/home/saurabh/Downloads/DrugData/drugsComTrain_raw.csv")  ###please please add path for your data files
-df_test = pd.read_csv("/home/saurabh/Downloads/DrugData/drugsComTest_raw.csv")
+df_train = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\HackthonFB\\drugsComTrain_raw.csv")  ###please please add path for your data files
+df_test = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\HackthonFB\\drugsComTest_raw.csv")
 ## don't mess with the following code, out of ur reach
 df_all = pd.concat([df_train,df_test])
 
@@ -107,8 +107,8 @@ def home():
 			suitable_rating = 0
 		suitable_other_desease = list(set(suitable_other_desease))
 		suitable_other_meds = list(set(suitable_other_meds))
-		suitable_other_desease.sort()
-		suitable_other_meds.sort()
+		#suitable_other_desease.sort()
+		#suitable_other_meds.sort()
 		suitable_other_desease = suitable_other_desease[::-1]
 		suitable_other_meds =suitable_other_meds[::-1]
 		if(len(suitable_other_desease) > 10):
