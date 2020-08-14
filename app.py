@@ -3,11 +3,49 @@ import pandas as pd
 from statistics import mean
 from flask_dance.contrib.google import make_google_blueprint, google
 import os
+from wit import Wit
+from io import StringIO
 
+
+'''
+# data preprocessing part, adding for understanding ... not your job
+# from bs4 import BeautifulSoup
+# import nltk
+# from nltk.corpus import stopwords
+# from nltk.stem.snowball import SnowballStemmer
+
+# \r\n : we need to convert html grammer
+# ... , ' : deal with not alphabet
+# this is most shit part, but have to do it
+
+# stemmer = SnowballStemmer('english')
+
+# def review_to_words(raw_review):
+#     # 1. Delete HTML 
+#     review_text = BeautifulSoup(raw_review, 'html.parser').get_text()
+#     # 2. Make a space
+#     letters_only = re.sub('[^a-zA-Z]', ' ', review_text)
+#     # 3. lower letters
+#     words = letters_only.lower().split()
+#     # 5. Stopwords 
+#     meaningful_words = [w for w in words if not w in stops]
+#     # 6. Stemming
+#     stemming_words = [stemmer.stem(w) for w in meaningful_words]
+#     # 7. space join words
+#     return( ' '.join(stemming_words))
+
+# Almost died in writing this line ;)
+
+# %time df_train['review'] = df_train['review'].apply(review_to_words)
+# CPU times: user 5min 33s, sys: 1.66 s, total: 5min 35s
+# Wall time: 5min 40s
+
+'''
 
 
 app=Flask(__name__)
 
+client = Wit("Y6XVDB4EY4K7RC2QMWAWXQSAZDOR2NOM")
 
 app.secret_key = "hope is a good thing"
 app.config["GOOGLE_OAUTH_CLIENT_ID"] = "751522856838-8gqi8qv7hqcuut62ljpvjfkablnih7jq.apps.googleusercontent.com"
@@ -17,14 +55,22 @@ app.register_blueprint(google_bp, url_prefix="/login")
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 
+# https://drive.google.com/file/d/11w3B_ni4u2LvK4OPQ07cS3yeCgIl7re5/view?usp=sharing
+## you won't get it, so don't try to understand, it's complicated..
 
-## data preprocessing calculations
+url1 = 'https://drive.google.com/file/d/11w3B_ni4u2LvK4OPQ07cS3yeCgIl7re5/view?usp=sharing'
+path1 = 'https://drive.google.com/uc?export=download&id='+url1.split('/')[-2]
 
-df_train = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\HackthonFB\\drugsComTrain_raw.csv")  ###please please add path for your data files
-df_test = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\HackthonFB\\drugsComTest_raw.csv")
-## don't mess with the following code, out of ur reach
+url2 = 'https://drive.google.com/file/d/18oXt6odrqNYHGL6cCWltX0DKFahes_gu/view?usp=sharing'
+path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
+
+
+df_train = pd.read_csv(path2)
+df_test = pd.read_csv(path1)
+
 df_all = pd.concat([df_train,df_test])
 
+## Not proud of myself after doing this, but it worked..
 drug = list(df_all["drugName"])
 disease = list(df_all["condition"])
 rating = list(df_all["rating"])
@@ -35,7 +81,7 @@ date = list(df_all["date"])
 # df_all["year"] = l
 # years = list(df_all["year"])
 
-## removing "90 users </span> found it useful on demand of sarthak singh.."
+## removing "90 useRS </span> found it useful on demand of sarthak singh.."
 #count = 0
 for i in range(len(disease)):
     if("span" in str(disease[i])):
@@ -85,16 +131,24 @@ def home():
 			if(condition == disease[i] and meds == drug[i]):
 				suitable_rating.append(rating[i])
 				review_with_rating.append((rating[i], review[i]))
-				sentiment = "Neutral"
-				if(rating[i] >7):
-					sentiment = "Positive"
-					positive_sentiments += 1
-				if(rating[i]<5):
-					sentiment = "Negative"
-					negative_sentiments +=1
-				if(rating[i] >=5 and rating[i] <=7):
-					neutral_sentiments +=1
-				reviews.append((review[i],date[i], sentiment,rating[i]))
+				review_msg = client.message(review[i][:280])
+				sentiment = ""
+				score = 1
+				#print(review_msg["traits"]['wit$sentiment'])
+				if(review_msg["traits"] != {}):
+					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'positive'):
+						sentiment = "Positive"
+						positive_sentiments += 1
+						score = review_msg["traits"]["wit$sentiment"][0]["confidence"]
+					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'negative'):
+						sentiment = "Negative"
+						negative_sentiments +=1
+						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * (-1)
+					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'neutral'):
+						sentiment = "Neutral"
+						neutral_sentiments +=1
+						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * 0
+					reviews.append((review[i],date[i], sentiment,score))
 
 			if(condition == disease[i] and rating[i] > 7):
 				suitable_other_meds.append((rating[i], drug[i]))
@@ -107,8 +161,8 @@ def home():
 			suitable_rating = 0
 		suitable_other_desease = list(set(suitable_other_desease))
 		suitable_other_meds = list(set(suitable_other_meds))
-		#suitable_other_desease.sort()
-		#suitable_other_meds.sort()
+		suitable_other_desease.sort()
+		suitable_other_meds.sort()
 		suitable_other_desease = suitable_other_desease[::-1]
 		suitable_other_meds =suitable_other_meds[::-1]
 		if(len(suitable_other_desease) > 10):
@@ -148,5 +202,6 @@ def home():
                            picture = picture)
 
 if __name__=='__main__':
-	app.run(debug=True)   ##saurabh's favourite part to discuss in views 
+	app.run(debug=True)    
 
+# I AM IRON-MAN
