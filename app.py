@@ -81,7 +81,7 @@ date = list(df_all["date"])
 # df_all["year"] = l
 # years = list(df_all["year"])
 
-## removing "90 useRS </span> found it useful on demand of sarthak singh.."
+## removing "90 users </span> found it useful on demand of sarthak singh.."
 #count = 0
 for i in range(len(disease)):
     if("span" in str(disease[i])):
@@ -161,8 +161,8 @@ def home():
 			suitable_rating = 0
 		suitable_other_desease = list(set(suitable_other_desease))
 		suitable_other_meds = list(set(suitable_other_meds))
-		suitable_other_desease.sort()
-		suitable_other_meds.sort()
+# 		suitable_other_desease.sort()
+# 		suitable_other_meds.sort()
 		suitable_other_desease = suitable_other_desease[::-1]
 		suitable_other_meds =suitable_other_meds[::-1]
 		if(len(suitable_other_desease) > 10):
