@@ -80,7 +80,8 @@ def home():
 		negative_sentiments = 0
 		positive_sentiments = 0
 		neutral_sentiments = 0
-
+		suitable_other_meds_name=[]
+		suitable_other_meds_rating=[]
 		for i in range(len(drug)):
 			if(condition == disease[i] and meds == drug[i]):
 				suitable_rating.append(rating[i])
@@ -97,6 +98,8 @@ def home():
 				reviews.append((review[i],date[i], sentiment,rating[i]))
 
 			if(condition == disease[i] and rating[i] > 7):
+				suitable_other_meds_name.append(drug[i])
+				suitable_other_meds_rating.append(rating[i])
 				suitable_other_meds.append((rating[i], drug[i]))
 			if(meds == drug[i] and rating[i] >7):
 				suitable_other_desease.append((int(rating[i]),disease[i]))
@@ -130,7 +133,14 @@ def home():
 			neutral_sentiments = round(neutral_sentiments,2)
 			negative_sentiments = round(negative_sentiments,2)
 
-
+		p=[positive_sentiments,negative_sentiments,neutral_sentiments]
+		
+		if len(suitable_other_meds_name) >5 :
+			suitable_other_meds_name=suitable_other_meds_name[:5]
+		if len(suitable_other_meds_rating) >5 :
+			suitable_other_meds_rating=suitable_other_meds_rating[:5]
+		print(suitable_other_meds_name)
+		print(suitable_other_meds_rating)
 		return render_template("result.html",
                            total_sentiments=total_sentiments, 
                            search_disease = search_disease, 
@@ -145,7 +155,10 @@ def home():
                            negative_sentiments= negative_sentiments,
                            neutral_sentiments=neutral_sentiments,
                            email = email,
-                           picture = picture)
+                           picture = picture,
+                           p=p,
+                           suitable_other_meds_name=suitable_other_meds_name,
+                           suitable_other_meds_rating=suitable_other_meds_rating)
 
 if __name__=='__main__':
 	app.run(debug=True)   ##saurabh's favourite part to discuss in views 
