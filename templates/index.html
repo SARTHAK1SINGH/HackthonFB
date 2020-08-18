@@ -39,7 +39,7 @@
         .landing-page
         {
             width: 100%;
-            height: 100vh;
+            height: 130vh;
             background-color: #212121;
             /*background: linear-gradient(
             to right,
@@ -77,6 +77,15 @@
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
+        }
+        .help
+        {
+            margin-top: -70px;
+            justify-content: center;
+            align-items: center;
+            font-family: "Share Tech Mono", monospace;
+            text-align: center;
+
         }
         
         #snackbar {
@@ -143,7 +152,7 @@
         @media (max-width: 400px)
         {
             .title{
-                font-size: 40px;
+                font-size: 38px;
             }
         }
         hr{
@@ -223,9 +232,15 @@
                     <label for="exampleInputPassword1">Medicine</label>
                     <input type="text" class="form-control" id="medicine" placeholder="Enter your Medicine"name = "drug">
                     </div> &nbsp;&nbsp;
-                    <button type="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #48494a;border:none"><i class="fa fa-search" style="color:white"></i> Analyze</button>
+                    <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #48494a;border:none"><i class="fa fa-search" style="color:white"></i> Analyze</button>
                 </div>
             </form>    
+        </div>
+          <div class="help">
+          <h3>Details to trigger Voice Recognition</h3>
+        <p>To fill disease section say <b>My disease is</b> "Disease name" </p>
+        <p>To fill medicine section say <b>My medicine is</b> "medicine name" </p>
+        <p>To Submit say <b>Submit </b> </p>
         </div>
     </div>
 
@@ -236,6 +251,37 @@
     </div>
 </body>
 </html>
+
+<!-- js for voice intration -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+  <script>
+      if (annyang) {
+        // Let's define our first command. First the text we expect, and then the function it should call
+        var commands = {
+          'my disease is *tag': function(variable) {
+            let disease = document.getElementById("disease");
+            disease.value = variable;
+          },
+          'my medicine is *tag': function(variable) {
+            let medicine = document.getElementById("medicine");
+            medicine.value = variable;
+          },
+          'Submit': function() {
+              document.getElementById("submit").click();
+            }
+        };
+
+        // Add our commands to annyang
+        annyang.addCommands(commands);
+
+        // Start listening. You can call this here, or attach this call to an event, button, etc.
+        annyang.start();
+      }
+  </script>
+
+
+<!-- js for autofill box -->
 
 <script type="text/javascript">
     
