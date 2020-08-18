@@ -68,6 +68,7 @@ path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
 df_train = pd.read_csv(path2)
 df_test = pd.read_csv(path1)
 
+
 df_all = pd.concat([df_train,df_test])
 
 ## Not proud of myself after doing this, but it worked..
