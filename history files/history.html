@@ -61,6 +61,13 @@
             box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
             background: rgb(29, 28, 27);
         }
+        .history.hide{
+            display: none;
+        }
+        .history.show{
+            width: 100%;
+            height: auto;
+        }
 
         table {
         border-collapse: collapse;
@@ -82,6 +89,29 @@
         {
         justify-content: right;
         text-align: right;
+        }
+
+
+        .pagination {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        }
+
+        .pagination div {
+        display: inline-block;
+        color: rgb(255, 255, 255);
+        padding: 8px 16px;
+        text-decoration: none;
+        }
+        .pagination .next, .pagination .prev {
+            border: 1px solid rgb(255, 254, 254);
+            cursor: pointer;
+        }
+        .pagination .next.disable, .pagination .prev.disable {
+            border-color: rgb(88, 86, 86) ;
+            color: rgb(83, 81, 81);
+            pointer-events: none;
         }
     </style>
 </head>
@@ -111,12 +141,11 @@
     <hr>
 
 
-
-<div class="layout">
+<div class="layout" id="layout">
 
     <div class="history">
         <div class="date-time">
-            <p>12-AUG-2020, 11:55 min</p>
+            <p>1-AUG-2020, 11:55 min</p>
         </div>
         <div style="overflow-x:auto;">
             <table>
@@ -142,7 +171,232 @@
     
     <div class="history">
         <div class="date-time">
-            <p>12-AUG-2020, 11:55 min</p>
+            <p>2-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>3-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>4-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>5-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>6-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>7-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>8-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>9-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>10-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>11-AUG-2020, 11:55 min</p>
         </div>
         <div style="overflow-x:auto;">
             <table>
@@ -169,6 +423,158 @@
     <div class="history">
         <div class="date-time">
             <p>12-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>10-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>11-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="history">
+        <div class="date-time">
+            <p>12-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>10-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="history">
+        <div class="date-time">
+            <p>11-AUG-2020, 11:55 min</p>
+        </div>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                <th>User Name:</th>
+                <th>Sarthak Singh</th>
+                </tr>
+                <tr>
+                <th>Condition:</th>
+                <td>Hairfall</td>
+                </tr>
+                <tr>
+                <th>medicinees:</th>
+                <td>Arnica Hair-oil / Arnica tablet</td> 
+                </tr>
+                <tr>
+                <th>Average rating:</th>
+                <td>8.5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="history">
+        <div class="date-time">
+            <p>17-AUG-2020, 11:55 min</p>
         </div>
         <div style="overflow-x:auto;">
             <table>
@@ -194,11 +600,21 @@
 
 </div>
 <br><br>
+
+
+    <div class="pagination">
+        <div class="prev"> &laquo; Prev</div>
+        <div class="page">Page <span class="page-num"></span></div>
+        <div class="next">Next &raquo;</div>
+    </div>
+<br><br>
 <hr>
     <footer style="align-items: center; text-align: center;">
         <h5>Powered by <a href="wit.ai">wit.ai</a></h5> 
         <p><a href="#top">Back to Top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>       
     </footer>
     
+<script src="pagination.js"></script>
+
 </body>
 </html>
