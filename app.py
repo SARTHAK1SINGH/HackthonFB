@@ -6,6 +6,10 @@ import os
 from wit import Wit
 from io import StringIO
 
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+
 
 '''
 # data preprocessing part, adding for understanding ... not your job
@@ -45,9 +49,24 @@ from io import StringIO
 
 app=Flask(__name__)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+db = SQLAlchemy(app)
+
+class History(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	email = db.Column(db.String(200), nullable=False)
+	name = db.Column(db.String(200), default="Sundaram Dubey")
+	condition = db.Column(db.String(200), default="Heart Atack")
+	medicine = db.Column(db.String(200), default="apirin")
+	date_create = db.Column(db.DateTime, default=datetime.utcnow)
+
+	def __repr__(self):
+		return "<task %r> " % self.id
+
+
 client = Wit("Y6XVDB4EY4K7RC2QMWAWXQSAZDOR2NOM")
 
-app.secret_key = "hope is a good thing"
+app.secret_key = "Remember hope is a good thing maybe the best of the things and no good thing ever dies"
 app.config["GOOGLE_OAUTH_CLIENT_ID"] = "751522856838-8gqi8qv7hqcuut62ljpvjfkablnih7jq.apps.googleusercontent.com"
 app.config["GOOGLE_OAUTH_CLIENT_SECRET"] = "WN4v33Mx45sgUifN26p1638k"
 google_bp = make_google_blueprint(scope=["profile", "email"])
@@ -65,8 +84,8 @@ url2 = 'https://drive.google.com/file/d/18oXt6odrqNYHGL6cCWltX0DKFahes_gu/view?u
 path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
 
 
-df_train = pd.read_csv(path2)
-df_test = pd.read_csv(path1)
+df_train = pd.read_csv("/home/saurabh/Downloads/DrugData/drugsComTrain_raw.csv")
+df_test = pd.read_csv('/home/saurabh/Downloads/DrugData/drugsComTest_raw.csv')
 
 df_all = pd.concat([df_train,df_test])
 
@@ -81,7 +100,7 @@ date = list(df_all["date"])
 # df_all["year"] = l
 # years = list(df_all["year"])
 
-## removing "90 users </span> found it useful on demand of sarthak singh.."
+## removing "90 useRS </span> found it useful on demand of sarthak singh.."
 #count = 0
 for i in range(len(disease)):
     if("span" in str(disease[i])):
@@ -112,10 +131,18 @@ def home():
 		if not google.authorized:
 			return redirect(url_for("google.login"))
 		resp = google.get("/oauth2/v1/userinfo")
-		email=resp.json()["name"]
+		name=resp.json()["name"]
+		email=resp.json()["email"]
 		picture = resp.json()["picture"]
 		condition = request.form['condition']
 		meds = request.form['drug']
+		new_history = History(email=email, name=name, condition=condition, medicine=meds)
+		try:
+			db.session.add(new_history)
+			db.session.commit()
+		except:
+			return "there was an error in adding your task"
+
 		search_disease = condition
 		search_medicine = meds
 		suitable_rating = []
@@ -129,7 +156,7 @@ def home():
 		suitable_other_meds_name=[]
 		suitable_other_meds_rating=[]
 		for i in range(len(drug)):
-			if(condition == disease[i] and meds == drug[i]):
+			if(str(condition).lower() == str(disease[i]).lower() and str(meds).lower() == str(drug[i]).lower()):
 				suitable_rating.append(rating[i])
 				review_with_rating.append((rating[i], review[i]))
 				review_msg = client.message(review[i][:280])
@@ -151,11 +178,11 @@ def home():
 						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * 0
 					reviews.append((review[i],date[i], sentiment,score))
 
-			if(condition == disease[i] and rating[i] > 7):
+			if(str(condition).lower() == str(disease[i]).lower() and rating[i] > 7):
 				suitable_other_meds_name.append(drug[i])
 				suitable_other_meds_rating.append(rating[i])
 				suitable_other_meds.append((rating[i], drug[i]))
-			if(meds == drug[i] and rating[i] >7):
+			if(str(meds).lower() == str(drug[i]).lower() and rating[i] >7):
 				suitable_other_desease.append((int(rating[i]),disease[i]))
 		if(len(suitable_rating) > 0):
 			suitable_rating = mean(suitable_rating)
@@ -164,8 +191,8 @@ def home():
 			suitable_rating = 0
 		suitable_other_desease = list(set(suitable_other_desease))
 		suitable_other_meds = list(set(suitable_other_meds))
-# 		suitable_other_desease.sort()
-# 		suitable_other_meds.sort()
+	#	suitable_other_desease.sort()
+	#	suitable_other_meds.sort()
 		suitable_other_desease = suitable_other_desease[::-1]
 		suitable_other_meds =suitable_other_meds[::-1]
 		if(len(suitable_other_desease) > 10):
@@ -188,13 +215,12 @@ def home():
 			negative_sentiments = round(negative_sentiments,2)
 
 		p=[positive_sentiments,negative_sentiments,neutral_sentiments]
-		
 		if len(suitable_other_meds_name) >5 :
 			suitable_other_meds_name=suitable_other_meds_name[:5]
 		if len(suitable_other_meds_rating) >5 :
 			suitable_other_meds_rating=suitable_other_meds_rating[:5]
-		print(suitable_other_meds_name)
-		print(suitable_other_meds_rating)
+		# print(suitable_other_meds_name)
+		# print(suitable_other_meds_rating)
 		return render_template("result.html",
                            total_sentiments=total_sentiments, 
                            search_disease = search_disease, 
@@ -210,9 +236,20 @@ def home():
                            neutral_sentiments=neutral_sentiments,
                            email = email,
                            picture = picture,
-                           p=p,
+						   p=p,
                            suitable_other_meds_name=suitable_other_meds_name,
                            suitable_other_meds_rating=suitable_other_meds_rating)
+
+@app.route("/history")
+def history():
+	if not google.authorized:
+		return redirect(url_for("google.login"))
+	resp = google.get("/oauth2/v1/userinfo")
+	name=resp.json()["name"]
+	email=resp.json()["email"]
+	picture = resp.json()["picture"]
+	tasks = History.query.filter_by(email=email)
+	return render_template("history.html", tasks = tasks)
 
 if __name__=='__main__':
 	app.run(debug=True)    
