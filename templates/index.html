@@ -183,6 +183,7 @@ speechSynthesis.speak(new SpeechSynthesisUtterance(intro_speech));
 
 
 speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease name"));
+voiceactivation();
 
 }else{
  
@@ -326,6 +327,8 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
   <script>
+    function voiceactivation()
+    {
       if (annyang) {
         // Let's define our first command. First the text we expect, and then the function it should call
         var commands = {
@@ -333,14 +336,14 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease
             let disease = document.getElementById("disease");
             disease.value = variable;
 
-speechSynthesis.speak(new SpeechSynthesisUtterance("Now ,tell me your medicine  name"));
+            speechSynthesis.speak(new SpeechSynthesisUtterance("Now ,tell me your medicine  name"));
 
           },
           'my medicine is *tag': function(variable) {
             let medicine = document.getElementById("medicine");
             medicine.value = variable;
 
-speechSynthesis.speak(new SpeechSynthesisUtterance("Please confirm , disease name is"+disease.value +". and medicine name is "+medicine.value + ". Say Submit for starting analysis."));
+            speechSynthesis.speak(new SpeechSynthesisUtterance("Please confirm , disease name is"+disease.value +". and medicine name is "+medicine.value + ". Say Submit for starting analysis."));
 
           },
           'Submit': function() {
@@ -354,6 +357,7 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("Please confirm , disease nam
         // Start listening. You can call this here, or attach this call to an event, button, etc.
         annyang.start();
       }
+    }
   </script>
 
 
