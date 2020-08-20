@@ -25,7 +25,7 @@
 
   
    <!--css external file-->
-   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
+   <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}"> -->
 
 
     <style>
@@ -39,14 +39,14 @@
         .landing-page
         {
             width: 100%;
-            height: 130vh;
+            height: 100vh;
             background-color: #212121;
             /*background: linear-gradient(
             to right,
             #636261 0%,
             #212120 100%
             );*/
-            url("background.png") center no-repeat;
+            /* url("background.png") center no-repeat; */
             background-size: contain;
             position: relative;
         }
@@ -65,6 +65,9 @@
             font-size: 80px;
             letter-spacing: 2px;
             font-family: fantasy;
+            max-width: 40rem;
+            text-transform: uppercase;
+            text-align: center;
             background: linear-gradient(
             to right,
             rgba(249,105,14,1) 0%,
@@ -72,20 +75,34 @@
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 5s steps(27);
+            width: 27ch;
         }
+        @keyframes typing 
+        {
+            0%{
+                width: 0ch;
+                color: rgba(249,105,14,1);
+            }
+            100%{
+                width: 27ch;
+            }
+        }
+
+        
         .formbox{
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
         }
-        .help
-        {
-            margin-top: -70px;
-            justify-content: center;
-            align-items: center;
-            font-family: "Share Tech Mono", monospace;
-            text-align: center;
-
+        .formbox.clicked{
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 20px 30px 0 rgba(31, 230, 230, 0.3);
         }
         
         #snackbar {
@@ -133,8 +150,8 @@
           display: inline-block;
         }
         .ui-autocomplete {
-            max-height: 240px;
-            max-width: 300px;
+            max-height: 230px;
+            max-width: 240px;
             overflow-y: auto;
             /* prevent horizontal scrollbar */
             overflow-x: hidden;
@@ -153,6 +170,7 @@
         {
             .title{
                 font-size: 38px;
+                max-width: 22rem;
             }
         }
         hr{
@@ -165,11 +183,18 @@
               border: 0;
               height: 1px;
           }
+        
+
     </style>
 
 
 
 <script type="text/javascript">
+
+function helpFunction()
+{
+    document.getElementById("Help").click();
+}
   
 function introduction()
 {
@@ -179,6 +204,7 @@ if ('speechSynthesis' in window) {
 
 const intro_speech="Welcome to Cure Mate. You have activated voice interaction. Please say my disease is. and then disease name. Then Please say my medicine is. and then medicine name. Then for analysis say submit";
 document.getElementById("add_mic").style.color="#03dffc";
+$("#formbox").addClass('clicked');
 speechSynthesis.speak(new SpeechSynthesisUtterance(intro_speech));
 
 
@@ -224,16 +250,15 @@ voiceactivation();
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Understand Results</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Details to trigger Voice Recognition</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body" style="color:teal">
-              <li>Is your medicine is suitable for your condition or not.</li>
-              <li>What are other medicines that are good for your condition.</li>
-              <li>Is the medicines you are currently taking, can cure some other conditions too.</li>
-              <li>Analysis of user reviews based on sentiments using WIT.AI to grab the info about positive and negative review.</li>
+              <li>To fill disease section say My disease is "Disease name"</li>
+              <li>To fill medicine section say My medicine is "medicine name"</li>
+              <li>To Submit say Submit</li>
               <li>Go to history to see your past searches and watch out your results again.</li>
               <li>Click in <i class="fas fa-microphone fa-2x"></i> Icon in search box for fully Voice Automated help for using Voice Activated search.</li>
           </div>
@@ -245,14 +270,14 @@ voiceactivation();
       </div>
     </div>
 
-<body>
+<body onload="helpFunction()">
 
     <div class="landing-page">
 
 <!-- nav-bar top -->
 
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="#">Cure Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+  <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="/">Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -260,10 +285,10 @@ voiceactivation();
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-       <a class="nav-link" href="{{url_for('history')}}">History</a>
+       <a style="color: rgb(115, 216, 216);" class="nav-link" href="{{url_for('history')}}">History</a>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModalCenter" style="border:none">
+        <button type="button" id="Help" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModalCenter" style="border: none;">
           Help
         </button>
       </li>
@@ -284,8 +309,9 @@ voiceactivation();
 
         <div class="header">
             <form autocomplete="off"  method = "POST" action = "/">
-                <h1 class="title"><i class="fa fa-hospital" aria-hidden="true"></i> The Cure Origin <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
-                <div class="formbox">
+
+                <h1 class="title"> Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
+                <div class="formbox" id="formbox">
                     <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">Disease</label>
                     <input type="text" class="form-control" id="disease"  placeholder="Enter your Disease" name ="condition">
@@ -301,12 +327,6 @@ voiceactivation();
 
                 </div>
             </form>    
-        </div>
-          <div class="help">
-          <h3>Details to trigger Voice Recognition</h3>
-        <p>To fill disease section say <b>My disease is</b> "Disease name" </p>
-        <p>To fill medicine section say <b>My medicine is</b> "medicine name" </p>
-        <p>To Submit say <b>Submit </b> </p>
         </div>
     </div>
 
