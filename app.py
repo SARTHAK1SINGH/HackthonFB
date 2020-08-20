@@ -85,8 +85,8 @@ url2 = 'https://drive.google.com/file/d/18oXt6odrqNYHGL6cCWltX0DKFahes_gu/view?u
 path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
 
 
-df_train = pd.read_csv("/home/saurabh/Downloads/DrugData/drugsComTrain_raw.csv")
-df_test = pd.read_csv('/home/saurabh/Downloads/DrugData/drugsComTest_raw.csv')
+df_train = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\only programmig\\drugsComTrain_raw.csv")
+df_test = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\only programmig\\drugsComTest_raw.csv")
 
 df_all = pd.concat([df_train,df_test])
 
