@@ -65,7 +65,7 @@
             font-size: 80px;
             letter-spacing: 2px;
             font-family: fantasy;
-            max-width: 45rem;
+            max-width: 40rem;
             text-transform: uppercase;
             text-align: center;
             background: linear-gradient(
@@ -150,7 +150,7 @@
           display: inline-block;
         }
         .ui-autocomplete {
-            max-height: 210px;
+            max-height: 230px;
             max-width: 240px;
             overflow-y: auto;
             /* prevent horizontal scrollbar */
@@ -183,6 +183,8 @@
               border: 0;
               height: 1px;
           }
+        
+
     </style>
 
 
@@ -283,10 +285,10 @@ voiceactivation();
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-       <a class="nav-link" href="{{url_for('history')}}">History</a>
+       <a style="color: rgb(115, 216, 216);" class="nav-link" href="{{url_for('history')}}">History</a>
       </li>
       <li class="nav-item">
-        <button type="button" id="Help" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModalCenter" style="border:none">
+        <button type="button" id="Help" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModalCenter" style="border: none;">
           Help
         </button>
       </li>
@@ -308,7 +310,7 @@ voiceactivation();
         <div class="header">
             <form autocomplete="off"  method = "POST" action = "/">
 
-                <h1 class="title"><i class="fa fa-hospital" aria-hidden="true"></i> The Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
+                <h1 class="title"> Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
                 <div class="formbox" id="formbox">
                     <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">Disease</label>
