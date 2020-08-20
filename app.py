@@ -63,6 +63,7 @@ class History(db.Model):
 	def __repr__(self):
 		return "<task %r> " % self.id
 
+db.create_all()
 
 client = Wit("Y6XVDB4EY4K7RC2QMWAWXQSAZDOR2NOM")
 
