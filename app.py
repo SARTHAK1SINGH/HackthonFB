@@ -68,8 +68,8 @@ db.create_all()
 client = Wit("Y6XVDB4EY4K7RC2QMWAWXQSAZDOR2NOM")
 
 app.secret_key = "Remember hope is a good thing maybe the best of the things and no good thing ever dies"
-app.config["GOOGLE_OAUTH_CLIENT_ID"] = "751522856838-8gqi8qv7hqcuut62ljpvjfkablnih7jq.apps.googleusercontent.com"
-app.config["GOOGLE_OAUTH_CLIENT_SECRET"] = "WN4v33Mx45sgUifN26p1638k"
+app.config["GOOGLE_OAUTH_CLIENT_ID"] = "751522856838-vm3cp81av9cbi83ucp454vumhv4ud3bg.apps.googleusercontent.com"
+app.config["GOOGLE_OAUTH_CLIENT_SECRET"] = "D3l7vOlgoKPsB_MtgGFWmJcm"
 google_bp = make_google_blueprint(scope=["profile", "email"])
 app.register_blueprint(google_bp, url_prefix="/login")
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
