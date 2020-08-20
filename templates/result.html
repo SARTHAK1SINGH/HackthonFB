@@ -111,10 +111,11 @@
                 <button type="button" id="Help" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModalCenter" style="border: none;">Help</button>
             </li>
             </ul>
-            <button onclick = "CreatePDFfromHTML()" class="btn btn-secondary">Download Result as PDF</button>&nbsp;
+            <form class="form-inline my-2 my-lg-0"></form>
+            <button style="margin-bottom: 2px;" onclick = "CreatePDFfromHTML()" class="btn btn-secondary">Download Result as PDF</button>&nbsp;
             <a href = "/">
             <button class="btn btn-outline-warning"> <i class="fa fa-arrow-left"> Go Home </i></button></a> &nbsp;&nbsp;
-            <form class="form-inline my-2 my-lg-0">
+            
             <button class="btn btn-outline-success my-2 my-sm-0" disabled>{{email}}</button>
             </form>&nbsp;
             <img src="{{picture}}" alt="profile picture" width="45px" style="border-radius: 40%">
@@ -260,7 +261,7 @@
 <!-- foooter section -->
 <hr>
     <footer style="align-items: center; text-align: center;">
-        <h5>Powered by <a href="https://wit.ai/">wit.ai</a></h5> 
+        <h5>Powered by <a href="https://wit.ai/" target="_blank">wit.ai</a></h5> 
         <p><a href="#top">Back to Top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>       
     </footer>
 
