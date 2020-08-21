@@ -61,6 +61,14 @@
 
 
     <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/result.css')}}">
+
+
+<style>
+    .title h4{
+        font-family: "Share Tech Mono", monospace;
+        text-align: center;
+    }
+</style>
 </head>
 
 <!-- Modal -->
@@ -128,7 +136,8 @@
 <!-- data result -->
         <div class="title" style="background-color: rgb(24, 22, 22);">
             <h2>Results for condition <span style="color: red">{{search_disease}} </span> and <span style="color:green">{{search_medicine}} </span> medicine that you enterd as you are using </h2>
-        </div>
+            <h4> <a class="ahover" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'"  style="color: rgb(115, 216, 216); text-decoration: none;" href="#statistics">See Stastistics</a> | <a class="ahover" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'" style="color: rgb(115, 216, 216); text-decoration: none;" href="#graphs">See Graphs</a> </h4>
+            </div>
          <div class="dismed"> 
             <div class="disdic has-margin-right ">
                 <div class="title-heading">
@@ -203,7 +212,7 @@
 
     <!-- bar graph -->
 
-    <div class="container-fluid">   
+    <div class="container-fluid" id="graphs">   
         <div class="row">
             <div class="col-sm-6">
             <canvas id="graph1" width="350" height="400"></canvas>
@@ -223,7 +232,7 @@
 
 
         <!-- sentiment Analysis table-->
-    <table class="table table-dark">
+    <table class="table table-dark"  id="statistics">
         <thead>
             <tr>
             <th scope="col">Date</th>
