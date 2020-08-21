@@ -297,7 +297,7 @@ voiceactivation();
     <a href="{{ url_for('google.login') }}">
       <button class="btn btn-outline-secondary my-2 my-sm-0" type="button"  onclick="login()">
         {% if is_active %}
-            {{name}} <img src ={{picture}} width="45px" style="border-radius: 50px">
+           <img src ={{picture}} width="45px" style="border-radius: 50px">
         {%else%}
             SignIn <i class="fa fa-user"></i>
         {%endif%}
