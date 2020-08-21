@@ -78,16 +78,9 @@ os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 # https://drive.google.com/file/d/11w3B_ni4u2LvK4OPQ07cS3yeCgIl7re5/view?usp=sharing
 ## you won't get it, so don't try to understand, it's complicated..
 
-url1 = 'https://drive.google.com/file/d/11w3B_ni4u2LvK4OPQ07cS3yeCgIl7re5/view?usp=sharing'
-path1 = 'https://drive.google.com/uc?export=download&id='+url1.split('/')[-2]
-
-url2 = 'https://drive.google.com/file/d/18oXt6odrqNYHGL6cCWltX0DKFahes_gu/view?usp=sharing'
-path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
-
-
-df_train = pd.read_csv("/home/saurabh/Downloads/DrugData/drugsComTrain_raw.csv")
-df_test = pd.read_csv('/home/saurabh/Downloads/DrugData/drugsComTest_raw.csv')
-
+df_train = pd.read_csv("C:\\Users\\SARTHAK SINGH\\Desktop\\git\\drugsComTrain_raw.csv")  ###please please add path for your data files
+df_test = pd.read_csv("C:\\Users\\SARTHAK SINGH\\Desktop\\git\\drugsComTest_raw.csv")
+## don't mess with the following code, out of ur reach
 df_all = pd.concat([df_train,df_test])
 
 ## Not proud of myself after doing this, but it worked..
@@ -250,7 +243,7 @@ def history():
 	email=resp.json()["email"]
 	picture = resp.json()["picture"]
 	tasks = History.query.filter_by(email=email)
-	return render_template("history.html", tasks = tasks)
+	return render_template("history.html", tasks = tasks, picture = picture)
 
 
 @app.route("/profile")

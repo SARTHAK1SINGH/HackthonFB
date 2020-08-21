@@ -121,18 +121,21 @@
 
 <!-- navbar -->
     <nav id="top" class="navbar navbar-expand-lg navbar-dark">
-        <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="/">Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+        <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="/">Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"> </i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            
-            
+            <li class="nav-item active">
+                 <a style="color: rgb(115, 216, 216);" href="/" class="nav-link"><i class="fa fa-arrow-left"></i> Go Home</a>
+            </li>
             </ul>
-           <a href = "/">
-            <button class="btn btn-outline-warning"> <i class="fa fa-arrow-left"> Go Home </i></button></a>
+            
+            <a href="{{url_for('profile')}}">
+            <img src="{{picture}}" alt="profile picture" width="45px" style="border-radius: 40%">
+            </a>
             
         </div>
     </nav>
