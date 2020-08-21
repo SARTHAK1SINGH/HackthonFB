@@ -129,11 +129,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                 <a style="color: rgb(115, 216, 216);" href="/" class="nav-link"><i class="fa fa-arrow-left"></i> Go Home</a>
+                 <a style="color: rgb(115, 216, 216);"  data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information" href="/" class="nav-link"><i class="fa fa-arrow-left"></i> Go Home</a>
             </li>
             </ul>
             
-            <a href="{{url_for('profile')}}">
+            <a href="{{url_for('profile')}}" data-toggle="tooltip" data-placement="bottom" title="Log Out">
             <img src="{{picture}}" alt="profile picture" width="45px" style="border-radius: 40%">
             </a>
             
