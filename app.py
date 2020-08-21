@@ -252,6 +252,18 @@ def history():
 	tasks = History.query.filter_by(email=email)
 	return render_template("history.html", tasks = tasks)
 
+
+@app.route("/profile")
+def profile():
+	if not google.authorized:
+		return redirect(url_for("google.login"))
+	resp = google.get("/oauth2/v1/userinfo")
+	name=resp.json()["name"]
+	email=resp.json()["email"]
+	picture = resp.json()["picture"]
+	return render_template('profile.html', name=name, email=email, picture=picture)
+
+
 if __name__=='__main__':
 	app.run(debug=True)    
 
