@@ -109,13 +109,13 @@
                  <a style="color: rgb(115, 216, 216);" class="nav-link" href="{{url_for('history')}}">History</a>
             </li>
             <li class="nav-item">
-                <button type="button" id="Help" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModalCenter" style="border: none;">Help</button>
+                <a style="color: rgb(115, 216, 216);" type="button" id="Help" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">Help</a>
             </li>
             </ul>
             <form class="form-inline my-2 my-lg-0"></form>
-            <button style="margin-bottom: 2px;" onclick = "CreatePDFfromHTML()" class="btn btn-secondary">Download Result as PDF</button>&nbsp;
-            <a href = "/">
-            <button class="btn btn-outline-warning"> <i class="fa fa-arrow-left"> Go Home </i></button></a> &nbsp;&nbsp;
+            <a style="color: rgb(115, 216, 216); cursor: pointer;" onclick = "CreatePDFfromHTML()" class="nav-link"> <i class="fa fa-arrow-down" aria-hidden="true"></i> Download Result's PDF</a>
+            
+            <a style="color: rgb(115, 216, 216);" href = "/" class="nav-link"> <i class="fa fa-arrow-left"> Go Home </i></a>
             
             <a href="{{url_for('profile')}}">
             <img src="{{picture}}" alt="profile picture" width="45px" style="border-radius: 40%">
