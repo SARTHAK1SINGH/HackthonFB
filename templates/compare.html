@@ -1,0 +1,64 @@
+<form method ="POST" action="/compare">
+<input name ="med1" type = "text" required/>
+<input  name="med2" type="text" required/>
+<input type="submit" value="submit"/>
+</form>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+    <div class="container-fluid" id="graphs" style="justify-content:center;align-items:center;text-align:center">   
+        <div class="row" style="justify-content:center;align-items:center;text-align:center">
+            <div class="col-sm-6">
+            <canvas id="graph1" width="500" height="350"></canvas>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+
+    <script>
+    var ctx = document.getElementById("graph1").getContext("2d");
+
+    var data = {
+        labels: ["positive", "negative", "neutral"],
+        datasets: [
+            {
+                label: "medicine1",
+                backgroundColor: "blue",
+                data: [
+                    {%for  i in med1_data%}
+                        {{i}},
+                    {%endfor%}
+                ]
+            },
+            {
+                label: "medicine2",
+                backgroundColor: "red",
+                data: [{%for  i in med2_data%}
+                        {{i}},
+                    {%endfor%}]
+            },
+        ]
+    };
+
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        barValueSpacing: 2,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                }
+            }]
+        }
+    }
+});
+    </script>

@@ -78,8 +78,9 @@ os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 # https://drive.google.com/file/d/11w3B_ni4u2LvK4OPQ07cS3yeCgIl7re5/view?usp=sharing
 ## you won't get it, so don't try to understand, it's complicated..
 
-df_train = pd.read_csv("C:\\Users\\SARTHAK SINGH\\Desktop\\git\\drugsComTrain_raw.csv")  ###please please add path for your data files
-df_test = pd.read_csv("C:\\Users\\SARTHAK SINGH\\Desktop\\git\\drugsComTest_raw.csv")
+df_train = pd.read_csv("/home/saurabh/Desktop/drug_data/drugsComTest_raw.csv")
+df_test = pd.read_csv("/home/saurabh/Desktop/drug_data/drugsComTrain_raw.csv")
+
 ## don't mess with the following code, out of ur reach
 df_all = pd.concat([df_train,df_test])
 
@@ -256,6 +257,49 @@ def profile():
 	picture = resp.json()["picture"]
 	return render_template('profile.html', name=name, email=email, picture=picture)
 
+@app.route("/compare", methods =['GET', 'POST'])
+def compare():
+	if(request.method == 'GET'):
+		return render_template('compare.html')
+	else:
+		med1 = request.form["med1"]
+		med2 = request.form["med2"]
+		positive1 = 0
+		negative1 = 0
+		neutral1 = 0
+		positive2 = 0
+		negative2 = 0
+		neutral2 = 0
+		for i in range(len(drug)):
+			if(drug[i] == med1):
+				review_msg = client.message(review[i][:280])
+				if(review_msg["traits"] != {}):
+					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'positive'):
+						positive1 += 1
+						score = review_msg["traits"]["wit$sentiment"][0]["confidence"]
+					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'negative'):
+						negative1 +=1
+						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * (-1)
+					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'neutral'):
+						neutral1 +=1
+						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * 0
+			if(drug[i] == med2):
+				review_msg = client.message(review[i][:280])
+				if(review_msg["traits"] != {}):
+					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'positive'):
+						positive2 += 1
+						score = review_msg["traits"]["wit$sentiment"][0]["confidence"]
+					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'negative'):
+						negative2 +=1
+						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * (-1)
+					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'neutral'):
+						neutral2 +=1
+						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * 0
+			
+			med1_data = [positive1, negative1, neutral1]
+			med2_data = [positive2, negative2, neutral2]
+
+		return render_template('compare.html', med1_data = med1_data, med2_data = med2_data, med1= med1, med2=med2)
 
 if __name__=='__main__':
 	app.run(debug=True)    
