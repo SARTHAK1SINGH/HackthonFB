@@ -1,26 +1,93 @@
-<form method ="POST" action="/compare">
-<input name ="med1" type = "text" required/>
-<input  name="med2" type="text" required/>
-<input type="submit" value="submit"/>
-</form>
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Docs</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/2f32e53da2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
 
-    <div class="container-fluid" id="graphs" style="justify-content:center;align-items:center;text-align:center">   
-        <div class="row" style="justify-content:center;align-items:center;text-align:center">
-            <div class="col-sm-6">
-            <canvas id="graph1" width="500" height="350"></canvas>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+<style>
+    .workplace
+    {
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+        align-items: center;
+    }    
+    #graph1
+    {  
+        width: 100%;
+    }
+    .autocomplete {
+        position: relative;
+        display: inline-block;
+    }
+
+</style>
+
+</head>
+<body style="background-color:rgb(30, 30, 31);">
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="/">Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+       <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title=" See Search History" style="color:rgb(115, 216, 216);" href="{{url_for('history')}}">History</a>
+      </li>
+    </ul>
+    <a href="/" class="nav-link" style="color:rgb(115, 216, 216);"  data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information">
+    <i class="fa fa-arrow-left"> Go Home </i></a>
+  </div>
+</nav>
+<br> <br><br><br>
+    <div class="workplace">
+        <form method ="POST" action="/compare">
+            <div class="form-group autocomplete"><input name ="med1" class="form-control" type = "text" placeholder="Enter first Medicine" required/></div>
+            <div class="form-group autocomplete"><input  name="med2" class="form-control" placeholder="Enter second Medicine" type="text" required/></div>
+            <br><input class="btn btn-success" type="submit" value="Lets Compare"/>
+        </form>
+    </div>
+<br><br><br>
+    <div class="compare-graph">
+        <div class="container-fluid" id="graphs">   
+            <div class="row" style="justify-content:center;align-items:center;text-align:center">
+                <div class="col-sm-6">
+                <canvas id="graph1"  height="350"></canvas>
+                </div>
             </div>
         </div>
     </div>
-    <br>
-    <br>
+    <br><br>
+    
+    
+    
 
 
 
-    <script>
+
+<script>
     var ctx = document.getElementById("graph1").getContext("2d");
 
     var data = {
@@ -54,11 +121,21 @@ var myBarChart = new Chart(ctx, {
         barValueSpacing: 2,
         scales: {
             yAxes: [{
+                gridLines: {
+                color: "#8c8c8c"
+                },
                 ticks: {
                     min: 0,
                 }
-            }]
+            }],
+            xAxes: [{
+                gridLines: {
+                color: "#8c8c8c"
+                }
+            }],
         }
     }
 });
     </script>
+</body>
+</html>
