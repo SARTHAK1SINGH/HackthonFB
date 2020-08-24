@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Cure Mate</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/yPcDZHG/logo.png">
+    <title>The Cure-Mate</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2f32e53da2.js" crossorigin="anonymous"></script>
@@ -61,7 +62,43 @@
 
 
     <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/result.css')}}">
+
+
+<style>
+    .title h4{
+        font-family: "Share Tech Mono", monospace;
+        text-align: center;
+    }
+</style>
 </head>
+
+<!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Understand Results</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="color:teal">
+              <li>Is your medicine is suitable for your condition or not.</li>
+              <li>What are other medicines that are good for your condition.</li>
+              <li>Is the medicines you are currently taking, can cure some other conditions too.</li>
+              <li>Analysis of user reviews based on sentiments using WIT.AI to grab the information about positive and negative review.</li>
+              <li>Download your result in PDF through Top "Download result's PDF" Button</li>
+              <li>Go to history to see your past searches and watch out your results again.</li>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 <body> 
 
 <div class='html-content'>
@@ -70,7 +107,7 @@
 <!-- nav-bar top -->
 
         <nav id="top" class="navbar navbar-expand-lg navbar-dark">
-        <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="#">Cure-Mate<i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+        <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="/">Cure-Mate<i class="fa fa-heartbeat" aria-hidden="true"></i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -78,28 +115,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                 <a class="nav-link" href="{{url_for('history')}}">History</a>
+                 <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title=" See Search History" class="nav-link" href="{{url_for('history')}}">History</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Help</a>
+            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Let Us Help YOU">
+                <a style="color: rgb(115, 216, 216);" type="button" id="Help" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">Help</a>
             </li>
             </ul>
-            <button onclick = "CreatePDFfromHTML()" class="btn btn-secondary">Download Result as PDF</button>&nbsp;
-            <a href = "http://127.0.0.1:5000/">
-            <button class="btn btn-outline-warning"> <i class="fa fa-arrow-left"> Go Home </i></button></a> &nbsp;&nbsp;
-            <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-success my-2 my-sm-0" disabled>{{email}}</button>
-            </form>&nbsp;
+            <form class="form-inline my-2 my-lg-0"></form>
+            <a style="color: rgb(115, 216, 216); cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Download the result page" onclick = "CreatePDFfromHTML()" class="nav-link"> <i class="fa fa-arrow-down" aria-hidden="true"></i> Download Result's PDF</a>
+            
+            <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information" href = "/" class="nav-link"> <i class="fa fa-arrow-left"> Go Home </i></a>
+            
+            <a href="{{url_for('profile')}}" data-toggle="tooltip" data-placement="bottom" title="Log Out">
             <img src="{{picture}}" alt="profile picture" width="45px" style="border-radius: 40%">
+            </a>
         </div>
         </nav>
         <hr>
 
 
 <!-- data result -->
-        <div class="title">
+        <div class="title" style="background-color: rgb(24, 22, 22);">
             <h2>Results for condition <span style="color: red">{{search_disease}} </span> and <span style="color:green">{{search_medicine}} </span> medicine that you enterd as you are using </h2>
-        </div>
+            <h4> <a class="ahover" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'"  style="color: rgb(115, 216, 216); text-decoration: none;" href="#statistics">See Stastistics</a> | <a class="ahover" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'" style="color: rgb(115, 216, 216); text-decoration: none;" href="#graphs">See Graphs</a> </h4>
+            </div>
          <div class="dismed"> 
             <div class="disdic has-margin-right ">
                 <div class="title-heading">
@@ -149,7 +188,7 @@
 
 <!-- data analaysis percentage with colour -->
 
-    <div class="dataana">
+    <div class="dataana" style="background-color: rgb(22, 21, 21);">
 
         <table class="dataanaa" style="width: 100%;">
             <tr>
@@ -174,7 +213,7 @@
 
     <!-- bar graph -->
 
-    <div class="container-fluid">   
+    <div class="container-fluid" id="graphs">   
         <div class="row">
             <div class="col-sm-6">
             <canvas id="graph1" width="350" height="400"></canvas>
@@ -194,7 +233,7 @@
 
 
         <!-- sentiment Analysis table-->
-    <table class="table table-dark">
+    <table class="table table-dark"  id="statistics">
         <thead>
             <tr>
             <th scope="col">Date</th>
@@ -233,7 +272,7 @@
 <!-- foooter section -->
 <hr>
     <footer style="align-items: center; text-align: center;">
-        <h5>Powered by <a href="wit.ai">wit.ai</a></h5> 
+        <h5>Powered by <a href="https://wit.ai/" target="_blank">wit.ai</a></h5> 
         <p><a href="#top">Back to Top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>       
     </footer>
 

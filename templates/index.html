@@ -20,12 +20,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 
-<link rel="icon" type="image/png" sizes="32x32" href="logo.png">
-    <title>The Cure Mate</title>
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/yPcDZHG/logo.png">
+    <title>The Cure-Mate</title>
 
   
    <!--css external file-->
-   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}">
+   <!-- <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainpage.css') }}"> -->
 
 
     <style>
@@ -39,14 +39,14 @@
         .landing-page
         {
             width: 100%;
-            height: 130vh;
+            height: 100vh;
             background-color: #212121;
             /*background: linear-gradient(
             to right,
             #636261 0%,
             #212120 100%
             );*/
-            url("background.png") center no-repeat;
+            /* url("background.png") center no-repeat; */
             background-size: contain;
             position: relative;
         }
@@ -65,6 +65,9 @@
             font-size: 80px;
             letter-spacing: 2px;
             font-family: fantasy;
+            max-width: 40rem;
+            text-transform: uppercase;
+            text-align: center;
             background: linear-gradient(
             to right,
             rgba(249,105,14,1) 0%,
@@ -72,20 +75,34 @@
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 5s steps(27);
+            width: 27ch;
         }
+        @keyframes typing 
+        {
+            0%{
+                width: 0ch;
+                color: rgba(249,105,14,1);
+            }
+            100%{
+                width: 27ch;
+            }
+        }
+
+        
         .formbox{
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
         }
-        .help
-        {
-            margin-top: -70px;
-            justify-content: center;
-            align-items: center;
-            font-family: "Share Tech Mono", monospace;
-            text-align: center;
-
+        .formbox.clicked{
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 20px 30px 0 rgba(31, 230, 230, 0.3);
         }
         
         #snackbar {
@@ -133,8 +150,8 @@
           display: inline-block;
         }
         .ui-autocomplete {
-            max-height: 240px;
-            max-width: 300px;
+            max-height: 215px;
+            max-width: 240px;
             overflow-y: auto;
             /* prevent horizontal scrollbar */
             overflow-x: hidden;
@@ -153,6 +170,7 @@
         {
             .title{
                 font-size: 38px;
+                max-width: 22rem;
             }
         }
         hr{
@@ -165,11 +183,18 @@
               border: 0;
               height: 1px;
           }
+        
+
     </style>
 
 
 
 <script type="text/javascript">
+
+function helpFunction()
+{
+    document.getElementById("Help").click();
+}
   
 function introduction()
 {
@@ -179,10 +204,12 @@ if ('speechSynthesis' in window) {
 
 const intro_speech="Welcome to Cure Mate. You have activated voice interaction. Please say my disease is. and then disease name. Then Please say my medicine is. and then medicine name. Then for analysis say submit";
 document.getElementById("add_mic").style.color="#03dffc";
+$("#formbox").addClass('clicked');
 speechSynthesis.speak(new SpeechSynthesisUtterance(intro_speech));
 
 
 speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease name"));
+voiceactivation();
 
 }else{
  
@@ -223,18 +250,18 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Understand Results</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Details to trigger Voice Recognition</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body" style="color:teal">
-              <li>Is your medicine is suitable for your condition or not.</li>
-              <li>What are other medicines that are good for your condition.</li>
-              <li>Is the medicines you are currently taking, can cure some other conditions too.</li>
-              <li>Analysis of user reviews based on sentiments using WIT.AI to grab the info about positive and negative review.</li>
-              <li>Go to history to see your past searches and watch out your results again.</li>
-              <li>Click in <i class="fas fa-microphone fa-2x"></i> Icon in search box for fully Voice Automated help for using Voice Activated search.</li>
+              <li>First thing first Login With Us if not already.</li>
+              <li>Click on <i class="fas fa-microphone fa-2x"></i> Icon in search box for Activating Voice search and fully Voice Automated help.</li>
+              <li>To fill disease section say My disease is "Disease name" / Fill it manually</li>
+              <li>To fill medicine section say My medicine is "medicine name" / Fill it manually</li>
+              <li>To Submit say Submit / Click on Analyze</li>
+              <li style="color: rgb(104, 51, 7);">To Compare the reviews b/w 2 of you medicins click "Compare meds"</li>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
@@ -244,14 +271,14 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease
       </div>
     </div>
 
-<body>
+<body onload="helpFunction()">
 
     <div class="landing-page">
 
 <!-- nav-bar top -->
 
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="#">Cure Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+  <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="/">Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -259,19 +286,20 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-       <a class="nav-link" href="{{url_for('history')}}">History</a>
+       <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title=" See Search History" class="nav-link" href="{{url_for('history')}}">History</a>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Let Us Help YOU">
+        <a style="color: rgb(115, 216, 216);" type="button" id="Help" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">Help</a>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModalCenter" style="border:none">
-          Help
-        </button>
+        <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Compare 2 of your medicines" class="nav-link" href="{{url_for('compare')}}">Comapre Meds</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
     <a href="{{ url_for('google.login') }}">
       <button class="btn btn-outline-secondary my-2 my-sm-0" type="button"  onclick="login()">
         {% if is_active %}
-            {{name}} <img src ={{picture}} width="45px" style="border-radius: 50px">
+           <img src ={{picture}} width="45px" style="border-radius: 50px">
         {%else%}
             SignIn <i class="fa fa-user"></i>
         {%endif%}
@@ -283,8 +311,9 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease
 
         <div class="header">
             <form autocomplete="off"  method = "POST" action = "/">
-                <h1 class="title"><i class="fa fa-hospital" aria-hidden="true"></i> The Cure Origin <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
-                <div class="formbox">
+
+                <h1 class="title"> Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
+                <div class="formbox" id="formbox">
                     <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">Disease</label>
                     <input type="text" class="form-control" id="disease"  placeholder="Enter your Disease" name ="condition">
@@ -294,18 +323,12 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease
                     <input type="text" class="form-control" id="medicine" placeholder="Enter your Medicine"name = "drug">
                     </div> &nbsp;&nbsp;
 
-                    <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #48494a;border:none"><i class="fa fa-search" id="submit" style="color:white"></i> Analyze</button>
+                    <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #48494a;border:none"><i class="fa fa-search" id="submit" style="color:white"></i> Analyze</button> &nbsp;&nbsp;
 
-                     <i class="fas fa-microphone fa-2x" id="add_mic" style="margin-left: 15px" onclick="introduction()"></i>
+                     <i style="cursor: pointer;" class="fas fa-microphone fa-2x" id="add_mic" style="margin-left: 15px" onclick="introduction()"></i>
 
                 </div>
             </form>    
-        </div>
-          <div class="help">
-          <h3>Details to trigger Voice Recognition</h3>
-        <p>To fill disease section say <b>My disease is</b> "Disease name" </p>
-        <p>To fill medicine section say <b>My medicine is</b> "medicine name" </p>
-        <p>To Submit say <b>Submit </b> </p>
         </div>
     </div>
 
@@ -326,6 +349,8 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
   <script>
+    function voiceactivation()
+    {
       if (annyang) {
         // Let's define our first command. First the text we expect, and then the function it should call
         var commands = {
@@ -333,14 +358,14 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease
             let disease = document.getElementById("disease");
             disease.value = variable;
 
-speechSynthesis.speak(new SpeechSynthesisUtterance("Now ,tell me your medicine  name"));
+            speechSynthesis.speak(new SpeechSynthesisUtterance("Now ,tell me your medicine  name"));
 
           },
           'my medicine is *tag': function(variable) {
             let medicine = document.getElementById("medicine");
             medicine.value = variable;
 
-speechSynthesis.speak(new SpeechSynthesisUtterance("Please confirm , disease name is"+disease.value +". and medicine name is "+medicine.value + ". Say Submit for starting analysis."));
+            speechSynthesis.speak(new SpeechSynthesisUtterance("Please confirm , disease name is"+disease.value +". and medicine name is "+medicine.value + ". Say Submit for starting analysis."));
 
           },
           'Submit': function() {
@@ -354,6 +379,7 @@ speechSynthesis.speak(new SpeechSynthesisUtterance("Please confirm , disease nam
         // Start listening. You can call this here, or attach this call to an event, button, etc.
         annyang.start();
       }
+    }
   </script>
 
 
