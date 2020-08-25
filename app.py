@@ -259,9 +259,11 @@ def profile():
 
 @app.route("/compare", methods =['GET', 'POST'])
 def compare():
+	show_graph = False
 	if(request.method == 'GET'):
-		return render_template('compare.html')
+		return render_template('compare.html', show=show_graph)
 	else:
+		show_graph = True
 		med1 = request.form["med1"]
 		med2 = request.form["med2"]
 		positive1 = 0
@@ -299,7 +301,7 @@ def compare():
 			med1_data = [positive1, negative1, neutral1]
 			med2_data = [positive2, negative2, neutral2]
 
-		return render_template('compare.html', med1_data = med1_data, med2_data = med2_data, med1= med1, med2=med2)
+		return render_template('compare.html',show=show_graph, med1_data = med1_data, med2_data = med2_data, med1= med1, med2=med2)
 
 if __name__=='__main__':
 	app.run(debug=True)    
