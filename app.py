@@ -244,6 +244,7 @@ def history():
 	email=resp.json()["email"]
 	picture = resp.json()["picture"]
 	tasks = History.query.filter_by(email=email)
+	tasks = sorted(tasks, key = lambda i: i.date_create, reverse=True)
 	return render_template("history.html", tasks = tasks, picture = picture)
 
 
