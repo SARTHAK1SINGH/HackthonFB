@@ -328,6 +328,51 @@ voiceactivation();
                      <i style="cursor: pointer; margin-left: 15px;" class="fas fa-microphone fa-2x" id="add_mic" onclick="introduction()"></i>
 
                 </div>
+
+
+<!-- Select dataset from Checkboxes -->
+<br>
+              
+                <div class="data-checked" style="font-family: sans-serif;">
+                    <span><i class="fa fa-location-arrow" aria-hidden="true"></i> Data From : </span>
+
+                    <a id="text" style="color: coral; display:inline-block; position: relative;" >&nbsp; <i  class="fa fa-database" aria-hidden="true"></i> Dataset</a> &nbsp;&nbsp;
+                    <a id="text2" style="color: coral; display:none; position: relative;"><i  class="fa fa-twitter" aria-hidden="true"></i> Twitter </a>
+
+                
+
+
+
+
+                <div style="font-family: sans-serif; text-align: right; justify-content: right; justify-self: right;" class="checkboxes">
+
+                    <div class="dropdown dropright">
+                        <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span style="color: coral; display: inline-block;"><i class="fa fa-search" aria-hidden="true"></i> On <i class="fa fa-chevron-circle-right" aria-hidden="true"></i> &nbsp;<i id="icon1" style="color:#fff; display: inline-block;"  class="fa fa-database" aria-hidden="true"></i> &nbsp; <i  id="icon2" style="color:#fff; display: none" class="fa fa-twitter" aria-hidden="true"></i></span>
+                        </button>
+                        <div style="background-color: #212121; text-align: center;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <p style="color: #fff; ">Get Data From</p><hr>
+                            <label for="myCheck" style="color: coral;"><i  class="fa fa-database" aria-hidden="true"></i> Dataset</label> 
+                            <input type="checkbox" id="myCheck" onclick="myFunctioncheck()"><br>
+
+                            <label for="myCheck" style="color: coral;"><i  class="fa fa-twitter" aria-hidden="true"></i> twitter </label> 
+                            <input type="checkbox" id="myCheck2" onclick="myFunctioncheck2()">
+                        </div>
+                      </div>
+                    
+
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
             </form>    
         </div>
     </div>
@@ -344,6 +389,58 @@ voiceactivation();
     
 </body>
 </html>
+
+
+
+
+
+<!-- script for checkbox of search data from -->
+<script>
+$(document).ready(function() {
+    $('#myCheck').attr('checked', 'checked');
+});
+function myFunctioncheck() {
+  var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("text");
+  var icon1 = document.getElementById("icon1");
+  if (checkBox.checked == true){
+    text.style.display = "inline-block";
+    icon1.style.display = "inline-block";
+  } else {
+     text.style.display = "none";
+      icon1.style.display = "none";
+  }
+
+}
+
+
+function myFunctioncheck2() {
+  var checkBox = document.getElementById("myCheck2");
+  var text = document.getElementById("text2");
+  var icon1 = document.getElementById("icon2");
+  if (checkBox.checked == true){
+    text.style.display = "inline-block";
+    icon2.style.display = "inline-block";
+  } else {
+     text.style.display = "none";
+      icon2.style.display = "none";
+  }
+
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- js for voice intration -->
 
