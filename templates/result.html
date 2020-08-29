@@ -69,6 +69,11 @@
         font-family: "Share Tech Mono", monospace;
         text-align: center;
     }
+    #top
+        {
+            font-family: sans-serif;
+            font-weight: bold;
+        }
 </style>
 </head>
 
@@ -124,7 +129,7 @@
             <form class="form-inline my-2 my-lg-0"></form>
             <a style="color: rgb(115, 216, 216); cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Download the result page" onclick = "CreatePDFfromHTML()" class="nav-link"> <i class="fa fa-arrow-down" aria-hidden="true"></i> Download Result's PDF</a>
             
-            <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information" href = "/" class="nav-link"> <i class="fa fa-arrow-left"> Go Home </i></a>
+            <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information" href = "/" class="nav-link"> <i class="fa fa-arrow-left"> <b>Go Home</b> </i></a>
             
             <a href="{{url_for('profile')}}" data-toggle="tooltip" data-placement="bottom" title="Log Out">
             <img src="{{picture}}" alt="profile picture" width="45px" style="border-radius: 40%">
