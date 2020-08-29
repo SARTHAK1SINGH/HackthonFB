@@ -31,6 +31,11 @@
         justify-items: center;
         text-align: center;
         align-items: center;
+        border: 1px solid rgb(152, 154, 158);
+        margin-left:300px;
+        margin-right:300px;
+        background-color:rgb(68, 68, 69);
+        padding:80px;
     }    
     #graph1
     {  
@@ -66,35 +71,56 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-       <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title=" See Search History" style="color:rgb(115, 216, 216);" href="{{url_for('history')}}">History</a>
+       <a  data-toggle="tooltip" data-placement="bottom" title=" See Search History" style="color:rgb(115, 216, 216);" href="{{url_for('history')}}">History</a>
       </li>
     </ul>
-    <a href="/" class="nav-link" style="color:rgb(115, 216, 216);"  data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information">
+    <a href="/"  style="color:rgb(115, 216, 216);"  data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information">
     <i class="fa fa-arrow-left"> Go Home </i></a>
   </div>
 </nav>
 <br> <br><br><br>
     <div class="workplace">
         <form method ="POST" action="/compare">
-            <div class="form-group autocomplete"><input name ="med1" id="medicine" class="form-control" type = "text" placeholder="Enter first Medicine" required/></div>
-            <div class="form-group autocomplete"><input  name="med2" id="medicine2" class="form-control" placeholder="Enter second Medicine" type="text" required/></div>
-            <br><input class="btn btn-success" type="submit" value="Lets Compare"/>
+            <div class="form-group autocomplete"><input name ="med1" id="medicine" class="form-control" type = "text" placeholder="first Medicine..." style="border-radius:0" required/></div>
+            <div class="form-group autocomplete"><input  name="med2" id="medicine2" class="form-control" placeholder="second Medicine..." type="text" style="border-radius:0" required/></div>
+            <br><input class="btn" type="submit" value="let's compare" style="background-color:#eb5b34;border-radius:0; color:white"/>
         </form>
     </div>
 <br><br><br>
-
-    {% if show %}
-    <div class="compare-graph">
-        <div class="container-fluid" id="graphs">   
-            <div class="row" style="justify-content:center;align-items:center;text-align:center">
-                <div class="col-sm-6">
-                <canvas id="graph1"  height="350"></canvas>
+{% if show %}
+ <div style="text-align:center;justify-content:center">
+  <button  class="btn btn-link" onclick="openCity('graph')"><span style="font-size:20px">graph</span></button>&nbsp;&nbsp;&nbsp;&nbsp;nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="btn btn-link"  onclick="openCity('sideby')"><span style="font-size:20px">side by side</span></button>
+  <hr><br>
+  <div class="compare-graph">
+    <div id="graph" class="city">
+        <div class="compare-graph">
+            <div class="container-fluid" id="graphs">   
+                <div class="row" style="justify-content:center;align-items:center;text-align:center">
+                    <div class="col-sm-6">
+                    <canvas id="graph1"  height="400"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
+        <br><br>
     </div>
-    <br><br>
-    {%endif%}
+
+    <div id="sideby" style="display:none;color:white" class="city">
+        love tars love
+    </div>
+ {%endif%}
+</div>
+    <script>
+        function openCity(cityName) {
+        var i;
+        var x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+        }
+        document.getElementById(cityName).style.display = "block";  
+        }
+    </script>
     
     
 
@@ -109,7 +135,7 @@
         datasets: [
             {
                 label: "medicine1",
-                backgroundColor: "blue",
+                backgroundColor: "#588cf5",
                 data: [
                     {%for  i in med1_data%}
                         {{i}},
@@ -118,7 +144,7 @@
             },
             {
                 label: "medicine2",
-                backgroundColor: "red",
+                backgroundColor: "#f29191",
                 data: [{%for  i in med2_data%}
                         {{i}},
                     {%endfor%}]
@@ -135,17 +161,11 @@ var myBarChart = new Chart(ctx, {
         barValueSpacing: 2,
         scales: {
             yAxes: [{
-                gridLines: {
-                color: "#8c8c8c"
-                },
                 ticks: {
                     min: 0,
                 }
             }],
             xAxes: [{
-                gridLines: {
-                color: "#8c8c8c"
-                }
             }],
         }
     }
@@ -178,9 +198,5 @@ source: tags is the list of available tags*/
 
 
 </script>
-
-
-
-
 </body>
 </html>
