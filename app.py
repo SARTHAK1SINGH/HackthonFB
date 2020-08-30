@@ -100,6 +100,7 @@ rating = list(df_all["rating"])
 review = list(df_all["review"])
 userid = list(df_all["uniqueID"])
 date = list(df_all["date"])
+usefulCount = list(df_all["usefulCount"])
 # l = df_all["date"].dt.year
 # df_all["year"] = l
 # years = list(df_all["year"])
@@ -253,6 +254,7 @@ def history():
 	email=resp.json()["email"]
 	picture = resp.json()["picture"]
 	tasks = History.query.filter_by(email=email)
+	tasks = sorted(tasks, key = lambda i: i.date_create, reverse=True)
 	return render_template("history.html", tasks = tasks, picture = picture)
 
 
@@ -268,9 +270,11 @@ def profile():
 
 @app.route("/compare", methods =['GET', 'POST'])
 def compare():
+	show_graph = False
 	if(request.method == 'GET'):
-		return render_template('compare.html')
+		return render_template('compare.html', show=show_graph)
 	else:
+		show_graph = True
 		med1 = request.form["med1"]
 		med2 = request.form["med2"]
 		positive1 = 0
@@ -279,27 +283,47 @@ def compare():
 		positive2 = 0
 		negative2 = 0
 		neutral2 = 0
+		usefulCount1 = 0
+		usefulCount2 = 0
+		most_positive_review1 = "None"
+		most_negative_review1 = "None"
+		most_positive_review2 = "None"
+		most_negative_review2 = "None"
+		side_effect1 ="everything"
+		side_effect2 = "sideefft hi side effect"
+		max_rating_1 = 0
+		max_rating_2 = 0
 		for i in range(len(drug)):
 			if(drug[i] == med1):
 				review_msg = client.message(review[i][:280])
+				usefulCount1 += usefulCount[i]
+				if(rating[i] > max_rating_1):
+					max_rating_1 = rating[i]
 				if(review_msg["traits"] != {}):
 					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'positive'):
 						positive1 += 1
+						most_positive_review1 = review[i]
 						score = review_msg["traits"]["wit$sentiment"][0]["confidence"]
 					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'negative'):
 						negative1 +=1
+						most_negative_review1 = review[i]
 						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * (-1)
 					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'neutral'):
 						neutral1 +=1
 						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * 0
 			if(drug[i] == med2):
+				if(rating[i] > max_rating_2):
+					max_rating_2 = rating[i]
 				review_msg = client.message(review[i][:280])
+				usefulCount2 += usefulCount[i]
 				if(review_msg["traits"] != {}):
 					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'positive'):
 						positive2 += 1
+						most_positive_review2 = review[i]
 						score = review_msg["traits"]["wit$sentiment"][0]["confidence"]
 					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'negative'):
 						negative2 +=1
+						most_negative_review2 = review[i]
 						score = review_msg["traits"]["wit$sentiment"][0]["confidence"] * (-1)
 					if(review_msg["traits"]["wit$sentiment"][0]["value"] == 'neutral'):
 						neutral2 +=1
@@ -308,7 +332,19 @@ def compare():
 			med1_data = [positive1, negative1, neutral1]
 			med2_data = [positive2, negative2, neutral2]
 
-		return render_template('compare.html', med1_data = med1_data, med2_data = med2_data, med1= med1, med2=med2)
+		return render_template('compare.html',
+							show=show_graph,
+							med1_data = med1_data,
+							med2_data = med2_data,
+							med1= med1, med2=med2,
+							most_negative_review1 = most_negative_review1,
+							most_positive_review1=most_positive_review1,
+							most_positive_review2=most_positive_review2,
+							most_negative_review2=most_negative_review2,
+							usefulCount1=usefulCount1,
+							usefulCount2=usefulCount2,
+							max_rating_1=max_rating_1,
+							max_rating_2=max_rating_2)
 
 if __name__=='__main__':
 	app.run(debug=True)    

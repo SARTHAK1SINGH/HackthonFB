@@ -20,7 +20,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 
-<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/yPcDZHG/logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/6NDKWyf/Logo-Makr-9m-AUAP.png">
     <title>The Cure-Mate</title>
 
   
@@ -63,9 +63,9 @@
         .title{
             margin-bottom: 50px;
             font-size: 80px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-family: fantasy;
-            max-width: 40rem;
+            max-width: 50rem;
             text-transform: uppercase;
             text-align: center;
             background: linear-gradient(
@@ -278,7 +278,7 @@ voiceactivation();
 <!-- nav-bar top -->
 
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <a style="color: rgb(115, 216, 216);" class="navbar-brand" href="/">Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></a>
+  <a style="color: #edbeb2;" class="navbar-brand" href="/"><img src="https://i.ibb.co/RysHgz0/Logo-Makr-4e-Uz1-U.png"  alt="Cure-Mate"></a>&nbsp;&nbsp;&nbsp;&nbsp;
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -286,20 +286,20 @@ voiceactivation();
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-       <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title=" See Search History" class="nav-link" href="{{url_for('history')}}">History</a>
-      </li>
+       <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title=" See Search History"  href="{{url_for('history')}}"><b>History</b></a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Let Us Help YOU">
-        <a style="color: rgb(115, 216, 216);" type="button" id="Help" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">Help</a>
-      </li>
+        <a style="color: rgb(115, 216, 216);" type="button"  id="Help"  data-toggle="modal" data-target="#exampleModalCenter"><b>Help</b></a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class="nav-item">
-        <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Compare 2 of your medicines" class="nav-link" href="{{url_for('compare')}}">Comapre Meds</a>
-      </li>
+        <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Compare 2 of your medicines"  href="{{url_for('compare')}}"><b>Comapre Meds</b></a>
+      </li>&nbsp;&nbsp;&nbsp;
     </ul>
     <form class="form-inline my-2 my-lg-0">
     <a href="{{ url_for('google.login') }}">
-      <button class="btn btn-outline-secondary my-2 my-sm-0" type="button"  onclick="login()">
+      <button class="btn  my-2 my-sm-0" type="button"  onclick="login()" style="border-radius:0;color:#eb5b34;border-color:#eb5b34;background-color:none">
         {% if is_active %}
-           <img src ={{picture}} width="45px" style="border-radius: 50px">
+           <img src ={{picture}} width="50px" style="border-radius: 50px; ">
         {%else%}
             SignIn <i class="fa fa-user"></i>
         {%endif%}
@@ -316,18 +316,63 @@ voiceactivation();
                 <div class="formbox" id="formbox">
                     <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">Disease</label>
-                    <input type="text" class="form-control" id="disease"  placeholder="Enter your Disease" name ="condition">
+                    <input type="text" class="form-control" id="disease"  placeholder="what's your condition.." name ="condition" style="border-radius:0;width:300px">
                     </div>
                     <div class="form-group autocomplete">
                     <label for="exampleInputPassword1">Medicine</label>
-                    <input type="text" class="form-control" id="medicine" placeholder="Enter your Medicine"name = "drug">
-                    </div> &nbsp;&nbsp;
+                    <input type="text" class="form-control" id="medicine" placeholder="Enter your Medicine"name = "drug" style="border-radius:0;width:300px">
+                    </div> &nbsp;
+    
+                    <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #eb5b34; border:none; border-radius:0;height:38px"><i class="fa fa-search" id="submit" style="color:white;"></i> Analyze</button> &nbsp;&nbsp;
 
-                    <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #48494a;border:none"><i class="fa fa-search" id="submit" style="color:white"></i> Analyze</button> &nbsp;&nbsp;
-
-                     <i style="cursor: pointer;" class="fas fa-microphone fa-2x" id="add_mic" style="margin-left: 15px" onclick="introduction()"></i>
+                     <i style="cursor: pointer; margin-left: 15px;" class="fas fa-microphone fa-2x" id="add_mic" onclick="introduction()"></i>
 
                 </div>
+
+
+<!-- Select dataset from Checkboxes -->
+<br>
+              
+                <div class="data-checked" style="font-family: sans-serif;">
+                    <span><i class="fa fa-location-arrow" aria-hidden="true"></i> Data From : </span>
+
+                    <a id="text" style="color: coral; display:inline-block; position: relative;" >&nbsp; <i  class="fa fa-database" aria-hidden="true"></i> Dataset</a> &nbsp;&nbsp;
+                    <a id="text2" style="color: coral; display:none; position: relative;"><i  class="fa fa-twitter" aria-hidden="true"></i> Twitter </a>
+
+                
+
+
+
+
+                <div style="font-family: sans-serif; text-align: right; justify-content: right; justify-self: right;" class="checkboxes">
+
+                    <div class="dropdown dropright">
+                        <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span style="color: coral; display: inline-block;"><i class="fa fa-search" aria-hidden="true"></i> On <i class="fa fa-chevron-circle-right" aria-hidden="true"></i> &nbsp;<i id="icon1" style="color:#fff; display: inline-block;"  class="fa fa-database" aria-hidden="true"></i> &nbsp; <i  id="icon2" style="color:#fff; display: none" class="fa fa-twitter" aria-hidden="true"></i></span>
+                        </button>
+                        <div style="background-color: #212121; text-align: center;" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <p style="color: #fff; ">Get Data From</p><hr>
+                            <label for="myCheck" style="color: coral;"><i  class="fa fa-database" aria-hidden="true"></i> Dataset</label> 
+                            <input type="checkbox" id="myCheck" onclick="myFunctioncheck()"><br>
+
+                            <label for="myCheck" style="color: coral;"><i  class="fa fa-twitter" aria-hidden="true"></i> twitter </label> 
+                            <input type="checkbox" id="myCheck2" onclick="myFunctioncheck2()">
+                        </div>
+                      </div>
+                    
+
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
             </form>    
         </div>
     </div>
@@ -344,6 +389,58 @@ voiceactivation();
     
 </body>
 </html>
+
+
+
+
+
+<!-- script for checkbox of search data from -->
+<script>
+$(document).ready(function() {
+    $('#myCheck').attr('checked', 'checked');
+});
+function myFunctioncheck() {
+  var checkBox = document.getElementById("myCheck");
+  var text = document.getElementById("text");
+  var icon1 = document.getElementById("icon1");
+  if (checkBox.checked == true){
+    text.style.display = "inline-block";
+    icon1.style.display = "inline-block";
+  } else {
+     text.style.display = "none";
+      icon1.style.display = "none";
+  }
+
+}
+
+
+function myFunctioncheck2() {
+  var checkBox = document.getElementById("myCheck2");
+  var text = document.getElementById("text2");
+  var icon1 = document.getElementById("icon2");
+  if (checkBox.checked == true){
+    text.style.display = "inline-block";
+    icon2.style.display = "inline-block";
+  } else {
+     text.style.display = "none";
+      icon2.style.display = "none";
+  }
+
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- js for voice intration -->
 
