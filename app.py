@@ -78,7 +78,7 @@ os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 # https://drive.google.com/file/d/11w3B_ni4u2LvK4OPQ07cS3yeCgIl7re5/view?usp=sharing
 ## you won't get it, so don't try to understand, it's complicated..
 
-<<<<<<< HEAD
+
 url1 = 'https://drive.google.com/file/d/11w3B_ni4u2LvK4OPQ07cS3yeCgIl7re5/view?usp=sharing'
 path1 = 'https://drive.google.com/uc?export=download&id='+url1.split('/')[-2]
 
