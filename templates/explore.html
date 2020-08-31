@@ -30,7 +30,8 @@
 
 
 
-    <title>Explore</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/6NDKWyf/Logo-Makr-9m-AUAP.png">
+    <title>The Cure-Mate</title>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Share+Tech+Mono&display=swap');
@@ -164,19 +165,7 @@
             color: rgb(228, 218, 203);
             background-color: rgb(0, 0, 0);
         }
-        @media (max-width: 665px)
-        {
-            .title{
-                font-size: 45px;
-            }
-        }
-        @media (max-width: 400px)
-        {
-            .title{
-                font-size: 38px;
-                max-width: 22rem;
-            }
-        }
+        
         hr{
               background: linear-gradient(
                   to right,
@@ -191,7 +180,75 @@
           {
             padding: 10px;
           }
-   
+          #newsres
+          {
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border: 2px solid white;
+            margin: 10px;
+            margin-bottom: 40px;
+            background-color: black;
+            width: 48%;
+            display: inline-block;
+            box-shadow: 0 25px 10px 0 rgba(233, 236, 236, 0.3);
+          }
+            @media (max-width: 1125px)
+        {
+            #newsres
+            {
+              justify-content: center;
+              text-align: center;
+              align-items: center;
+              border: 2px solid white;
+              margin: 10px;
+              margin-bottom: 40px;
+              background-color: black;
+              width: 45%;
+            display: inline-block;
+            box-shadow: 0 25px 10px 0 rgba(233, 236, 236, 0.3);
+            }
+        }
+
+          @media (max-width: 665px)
+        {
+            .title{
+                font-size: 45px;
+            }
+            #newsres
+            {
+              justify-content: center;
+              text-align: center;
+              align-items: center;
+              border: 2px solid white;
+              margin: auto;
+              margin-bottom: 30px;
+              background-color: black;
+              width: 90%;
+              display: block;
+              box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
+            }
+        }
+        @media (max-width: 400px)
+        {
+            .title{
+                font-size: 38px;
+                max-width: 22rem;
+            }
+            #newsres
+            {
+              justify-content: center;
+              text-align: center;
+              align-items: center;
+              border: 2px solid white;
+              margin: auto;
+              margin-bottom: 40px;
+              background-color: black;
+              width: 90%;
+              display: block;
+              box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
+            }
+        }
     </style>
 
 <script>
@@ -218,15 +275,19 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-       <a  data-toggle="tooltip" data-placement="bottom" title=" See Search History" style="color:rgb(115, 216, 216);" href="{{url_for('history')}}">History</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </li>
+      <li class="nav-item">
+        <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Compare 2 of your medicines"  href="{{url_for('compare')}}"><b>Comapre Meds</b></a>
+      </li>&nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+       <a  data-toggle="tooltip" data-placement="bottom" title=" See Search History" style="color:rgb(115, 216, 216);" href="{{url_for('history')}}"><b>History</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </li>&nbsp;&nbsp;&nbsp;
+
     </ul>
     <a href="/"  style="color:rgb(115, 216, 216);"  data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information">
     <i class="fa fa-arrow-left"> <b>Go Home</b> </i></a>
   </div>
 </nav>
-<br> <br><br><br>
+<hr> <br><br><br>
 
  <div class="header">
             <form autocomplete="off"  method = "POST" action = "/explore">
@@ -237,10 +298,10 @@
                     <label for="exampleInputEmail1">Search for Disease or Medicine</label>
                     <input type="text" class="form-control" id="search_query"  placeholder="eg.. disease or medicine name" name ="search_query" style="border-radius:0;width:300px" value="{{request.form.search_query}}" required/>
                     </div>
-                    <br>
+                    <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">From Date:</label>
-                    <input type="date" id="start" class="form-control" name="startfrom"  min="2001-01-01" max="2030-12-31" required/>
-                    <br>
+                    <input type="date" id="start" class="form-control autocomplete" name="startfrom"  min="2001-01-01" max="2030-12-31" required/>
+                    </div>
                     <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #eb5b34; border:none; border-radius:0;height:38px"><i class="fa fa-search" id="submit" style="color:white;" ></i> Search</button> &nbsp;&nbsp;
                 </div>
 
@@ -253,13 +314,14 @@
 {% for index in total_elements  %}
 
 
-<div style="border: 2px solid white; margin: 10px;">
-<div class="jumbotron " id="jumbo" style="background-color: black">
-  <h1 class="display-4">{{title_list[index]}}</h1>
-  <p class="lead">{{description_list[index]}}</p>
+<div id="newsres">
+<div class="jumbotron " id="jumbo" style="background-color: black;">
+  <h1 style="font-family: Share Tech Mono, monospace;" >{{title_list[index]}}</h1>
   <hr class="my-2">
+  <p style="font-family: sans-serif;" class="lead">{{description_list[index]}}</p>
+  
  
-  <a class="btn btn-primary btn-lg" href="{{urls_headlines[index]}}" role="button">Read more</a>
+  <a style="color: rgb(115, 216, 216); text-decoration: none; font-size: 2rem;" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'" class="btn btn-lg" href="{{urls_headlines[index]}}" role="button">Read more</a>
 </div>
 
 </div>
