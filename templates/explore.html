@@ -228,7 +228,6 @@
 </nav>
 <br> <br><br><br>
 
-
  <div class="header">
             <form autocomplete="off"  method = "POST" action = "/explore">
 
@@ -236,14 +235,13 @@
                 <div class="formbox" id="formbox">
                     <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">Search for Disease or Medicine</label>
-                    <input type="text" class="form-control" id="search_query"  placeholder="eg.. disease or medicine name" name ="search_query" style="border-radius:0;width:300px" value="{{request.form.search_query}}">
+                    <input type="text" class="form-control" id="search_query"  placeholder="eg.. disease or medicine name" name ="search_query" style="border-radius:0;width:300px" value="{{request.form.search_query}}" required/>
                     </div>
-                 
-    
-                    <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #eb5b34; border:none; border-radius:0;height:38px"><i class="fa fa-search" id="submit" style="color:white;"></i> Search</button> &nbsp;&nbsp;
-
-               
-
+                    <br>
+                    <label for="exampleInputEmail1">From Date:</label>
+                    <input type="date" id="start" class="form-control" name="startfrom"  min="2001-01-01" max="2030-12-31" required/>
+                    <br>
+                    <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #eb5b34; border:none; border-radius:0;height:38px"><i class="fa fa-search" id="submit" style="color:white;" ></i> Search</button> &nbsp;&nbsp;
                 </div>
 
 
