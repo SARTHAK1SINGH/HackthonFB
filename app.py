@@ -94,8 +94,8 @@ url2 = 'https://drive.google.com/file/d/18oXt6odrqNYHGL6cCWltX0DKFahes_gu/view?u
 path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
 
 
-df_train = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\only programmig\\drugsComTrain_raw.csv")
-df_test = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\only programmig\\drugsComTest_raw.csv")
+df_train = pd.read_csv(path1)
+df_test = pd.read_csv(path2)
 
 
 ## don't mess with the following code, out of ur reach
@@ -309,37 +309,42 @@ def  explore():
 """
 
 
-
+import datetime
 @app.route("/explore",methods=['GET','POST'])
 def  explore():
-	if request.method == 'POST':
-		search_word=request.form['search_query']
-		print(search_word)
-		top_headlines = newsapi.get_everything(q=search_word,sort_by='relevancy',           
-                                          language='en',)
-		count_of_headlines=top_headlines['totalResults']
-		count_of_headlines=int(count_of_headlines)
-		title_list=[]
-		description_list=[]
-		urls_headlines=[]
+    if request.method == 'POST':
+        search_word=request.form['search_query']
+        startfrom = request.form['startfrom']
+        startfrom = str(startfrom)
+        entered_date = startfrom.split("-")
+        current_time = datetime.datetime.now()
+        print(startfrom)
+        if(int(entered_date[0])!= int(current_time.year) or int(entered_date[1]) != int(current_time.month)):
+            startfrom = str(current_time.year) + "-0" + str(current_time.month) + "-" + "01"
+        top_headlines = newsapi.get_everything(q=search_word,sort_by='relevancy',           
+                                language='en',from_param=str(startfrom))
+        count_of_headlines=top_headlines['totalResults']
+        count_of_headlines=int(count_of_headlines)
+        title_list=[]
+        description_list=[]
+        urls_headlines=[]
 
-		for headline in top_headlines['articles']:
-			title_list.append(headline['title'])
-			description_list.append(headline['description'])
-			urls_headlines.append(headline['url'])
+        for headline in top_headlines['articles']:
+            title_list.append(headline['title'])
+            description_list.append(headline['description'])
+            urls_headlines.append(headline['url'])
 
 
-		total_elements=[]
-		for i in range(len(title_list)):
-			total_elements.append(i)
-		print(total_elements)
-		
-		return render_template('explore.html',title_list=title_list,description_list=description_list,
-			urls_headlines=urls_headlines,total_elements=total_elements)
+        total_elements=[]
+        for i in range(len(title_list)):
+            total_elements.append(i)
+        print(total_elements)
 
-	else:
-		if request.method=='GET':
-			return render_template("explore.html")
+        return render_template('explore.html',title_list=title_list,description_list=description_list,
+        urls_headlines=urls_headlines,total_elements=total_elements)
+
+    else:
+        return render_template("explore.html")
 
 
 
