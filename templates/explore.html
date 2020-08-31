@@ -265,7 +265,11 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
   <script>
 
-  
+  function helpFunction()
+{
+    document.getElementById("Help").click();
+}
+
 function introduction()
 {
 
@@ -290,7 +294,6 @@ voiceactivation();
 
 
 }
-
 
 
 
@@ -331,7 +334,32 @@ voiceactivation();
 
 
   </head>
-  <body style="background-color:rgb(30, 30, 31);">
+
+
+<!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Details to trigger Voice Recognition</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="color:teal">
+              <li>Click on <i class="fas fa-microphone fa-2x"></i> Icon in search box for Activating Voice search and fully Voice Automated help.</li>
+              <li>To fill search for disease / medicine section say 'Search "Disease / medicine name" / Fill it manually</li>
+              <li>Fill the date manually from which you want the results.</li>
+              <li>To Search say Search / Click on Search</li>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <body onload="helpFunction()" style="background-color:rgb(30, 30, 31);">
  
 
 
@@ -345,11 +373,13 @@ voiceactivation();
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Compare 2 of your medicines"  href="{{url_for('compare')}}"><b>Comapre Meds</b></a>
-      </li>&nbsp;&nbsp;&nbsp;
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class="nav-item">
-       <a  data-toggle="tooltip" data-placement="bottom" title=" See Search History" style="color:rgb(115, 216, 216);" href="{{url_for('history')}}"><b>History</b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </li>&nbsp;&nbsp;&nbsp;
-
+       <a  data-toggle="tooltip" data-placement="bottom" title=" See Search History" style="color:rgb(115, 216, 216);" href="{{url_for('history')}}"><b>History</b></a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Let Us Help YOU">
+        <a style="color: rgb(115, 216, 216);" type="button"  id="Help"  data-toggle="modal" data-target="#exampleModalCenter"><b>Help</b></a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </ul>
     <a href="/"  style="color:rgb(115, 216, 216);"  data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information">
     <i class="fa fa-arrow-left"> <b>Go Home</b> </i></a>
