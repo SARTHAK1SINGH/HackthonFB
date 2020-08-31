@@ -262,6 +262,74 @@
   
 </script>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+  <script>
+
+  
+function introduction()
+{
+
+console.log("intro called");
+if ('speechSynthesis' in window) {
+
+const intro_speech="You have activated voice interaction. Please say Search and then search Keyword";
+document.getElementById("add_mic").style.color="#03dffc";
+$("#formbox").addClass('clicked');
+speechSynthesis.speak(new SpeechSynthesisUtterance(intro_speech));
+
+
+//speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease name"));
+voiceactivation();
+
+}else{
+ 
+  alert("Sorry, your browser doesn't support text to speech!");
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+    function voiceactivation()
+    {
+      if (annyang) {
+        // Let's define our first command. First the text we expect, and then the function it should call
+        var commands = {
+          'search *tag': function(variable) {
+            let search_query = document.getElementById("search_query");
+            search_query.value = variable;
+            speechSynthesis.speak(new SpeechSynthesisUtterance("Please conform your search keyword is"+search_query.value));
+
+            speechSynthesis.speak(new SpeechSynthesisUtterance("Now you need select the date. After that say submit to retrieve results"));
+
+
+          },
+          'Submit': function() {
+              document.getElementById("submit").click();
+            }
+        };
+
+        // Add our commands to annyang
+        annyang.addCommands(commands);
+
+        // Start listening. You can call this here, or attach this call to an event, button, etc.
+        annyang.start();
+      }
+    }
+  </script>
+
+
+
+
+
   </head>
   <body style="background-color:rgb(30, 30, 31);">
  
@@ -297,12 +365,15 @@
                     <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">Search for Disease or Medicine</label>
                     <input type="text" class="form-control" id="search_query"  placeholder="eg.. disease or medicine name" name ="search_query" style="border-radius:0;width:300px" value="{{request.form.search_query}}" required/>
+
                     </div>
                     <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">From Date:</label>
                     <input type="date" id="start" class="form-control autocomplete" name="startfrom"  min="2001-01-01" max="2030-12-31" required/>
                     </div>
                     <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #eb5b34; border:none; border-radius:0;height:38px"><i class="fa fa-search" id="submit" style="color:white;" ></i> Search</button> &nbsp;&nbsp;
+                      <i style="cursor: pointer; margin-left: 15px;" class="fas fa-microphone fa-2x" id="add_mic" onclick="introduction()"></i>
+
                 </div>
 
 
