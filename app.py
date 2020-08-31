@@ -8,6 +8,7 @@ from io import StringIO
 
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from newsapi import NewsApiClient
 
 
 
@@ -52,6 +53,13 @@ app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
+#newsapi
+newsapi = NewsApiClient(api_key='d81b895c895046279bfbbcad8be288ac')
+
+# /v2/top-headlines
+
+
+
 class History(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	email = db.Column(db.String(200), nullable=False)
@@ -78,8 +86,17 @@ os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 # https://drive.google.com/file/d/11w3B_ni4u2LvK4OPQ07cS3yeCgIl7re5/view?usp=sharing
 ## you won't get it, so don't try to understand, it's complicated..
 
-df_train = pd.read_csv("/home/saurabh/Desktop/drug_data/drugsComTest_raw.csv")
-df_test = pd.read_csv("/home/saurabh/Desktop/drug_data/drugsComTrain_raw.csv")
+
+url1 = 'https://drive.google.com/file/d/11w3B_ni4u2LvK4OPQ07cS3yeCgIl7re5/view?usp=sharing'
+path1 = 'https://drive.google.com/uc?export=download&id='+url1.split('/')[-2]
+
+url2 = 'https://drive.google.com/file/d/18oXt6odrqNYHGL6cCWltX0DKFahes_gu/view?usp=sharing'
+path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
+
+
+df_train = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\only programmig\\drugsComTrain_raw.csv")
+df_test = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\only programmig\\drugsComTest_raw.csv")
+
 
 ## don't mess with the following code, out of ur reach
 df_all = pd.concat([df_train,df_test])
@@ -258,6 +275,79 @@ def profile():
 	email=resp.json()["email"]
 	picture = resp.json()["picture"]
 	return render_template('profile.html', name=name, email=email, picture=picture)
+
+"""
+@app.route("/explore",methods=['GET','POST'])
+def  explore():
+	if request.method == 'POST':
+		search_word=request.form['search_query']
+		print(search_word)
+		top_headlines = newsapi.get_everything(q=search_word,sort_by='relevancy',           
+                                          language='en',)
+		count_of_headlines=top_headlines['totalResults']
+		count_of_headlines=int(count_of_headlines)
+		title_list=[]
+		description_list=[]
+		urls_headlines=[]
+
+		for headline in top_headlines['articles']:
+			title_list.append(headline['title'])
+			description_list.append(headline['description'])
+			urls_headlines.append(headline['url'])
+
+
+		total_elements=len(title_list)
+		print(total_elements)
+		
+		return render_template('explore.html',title_list=title_list,description_list=description_list,
+			urls_headlines=urls_headlines,total_elements=total_elements)
+
+	else:
+		return render_template("explore.html",nm="saurabh")
+
+			
+"""
+
+
+
+@app.route("/explore",methods=['GET','POST'])
+def  explore():
+	if request.method == 'POST':
+		search_word=request.form['search_query']
+		print(search_word)
+		top_headlines = newsapi.get_everything(q=search_word,sort_by='relevancy',           
+                                          language='en',)
+		count_of_headlines=top_headlines['totalResults']
+		count_of_headlines=int(count_of_headlines)
+		title_list=[]
+		description_list=[]
+		urls_headlines=[]
+
+		for headline in top_headlines['articles']:
+			title_list.append(headline['title'])
+			description_list.append(headline['description'])
+			urls_headlines.append(headline['url'])
+
+
+		total_elements=[]
+		for i in range(len(title_list)):
+			total_elements.append(i)
+		print(total_elements)
+		
+		return render_template('explore.html',title_list=title_list,description_list=description_list,
+			urls_headlines=urls_headlines,total_elements=total_elements)
+
+	else:
+		if request.method=='GET':
+			return render_template("explore.html")
+
+
+
+
+
+
+
+
 
 @app.route("/compare", methods =['GET', 'POST'])
 def compare():
