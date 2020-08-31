@@ -428,6 +428,18 @@ voiceactivation();
 </div>
 {% endfor %}
 
+{%if tweets%}
+<h1> Tweets </h1>
+{% for i in tweets %}
+    <div id="newsres">
+        <div class="jumbotron " id="jumbo" style="background-color: black;">
+        <h1 style="font-family: Share Tech Mono, monospace;" >{{i.created_at}}</h1>
+        <hr class="my-2">
+        <p style="font-family: sans-serif;" class="lead">{{i.full_text}}</p>    
+        </div>
+    </div>
+{%endfor%}
+{%endif%}
 
  
     <!-- Optional JavaScript -->
