@@ -10,6 +10,20 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from newsapi import NewsApiClient
 
+import tweepy
+from tweepy import OAuthHandler
+ 
+# Your Twittter App Credentials
+consumer_key = "IaP4pd9lH0TEkHywsdiYqEMMb"
+consumer_secret = "qvM0Q98xsjsspbO9ayVeiWjkaH4rRSMiRffYctZxeY7bGiKNR8"
+access_token = "1300109435822505985-4xuf3g1dvlvfz4Dgr41Wnx4vuxjUA4"
+access_token_secret = "P3qhYgLemyMJXZgHN7FTrLDg1ShzNfDvDwbBRmTH9BJDW"
+ 
+# Calling API
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+api = tweepy.API(auth)
+ 
 
 
 '''
@@ -317,7 +331,10 @@ def  explore():
         title_list=[]
         description_list=[]
         urls_headlines=[]
-
+        keyword = search_word
+        ##twitter tweets
+        tweets = api.search(keyword, count=20, lang='en', exclude='retweets',tweet_mode='extended', since=startfrom)
+        
         for headline in top_headlines['articles']:
             title_list.append(headline['title'])
             description_list.append(headline['description'])
@@ -330,7 +347,7 @@ def  explore():
         print(total_elements)
 
         return render_template('explore.html',title_list=title_list,description_list=description_list,
-        urls_headlines=urls_headlines,total_elements=total_elements)
+        urls_headlines=urls_headlines,total_elements=total_elements, tweets = tweets)
 
     else:
         return render_template("explore.html")
