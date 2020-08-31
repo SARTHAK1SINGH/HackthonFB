@@ -18,13 +18,10 @@ from newsapi import NewsApiClient
 # import nltk
 # from nltk.corpus import stopwords
 # from nltk.stem.snowball import SnowballStemmer
-
 # \r\n : we need to convert html grammer
 # ... , ' : deal with not alphabet
 # this is most shit part, but have to do it
-
 # stemmer = SnowballStemmer('english')
-
 # def review_to_words(raw_review):
 #     # 1. Delete HTML 
 #     review_text = BeautifulSoup(raw_review, 'html.parser').get_text()
@@ -38,13 +35,10 @@ from newsapi import NewsApiClient
 #     stemming_words = [stemmer.stem(w) for w in meaningful_words]
 #     # 7. space join words
 #     return( ' '.join(stemming_words))
-
 # Almost died in writing this line ;)
-
 # %time df_train['review'] = df_train['review'].apply(review_to_words)
 # CPU times: user 5min 33s, sys: 1.66 s, total: 5min 35s
 # Wall time: 5min 40s
-
 '''
 
 
@@ -289,57 +283,57 @@ def  explore():
 		title_list=[]
 		description_list=[]
 		urls_headlines=[]
-
 		for headline in top_headlines['articles']:
 			title_list.append(headline['title'])
 			description_list.append(headline['description'])
 			urls_headlines.append(headline['url'])
-
-
 		total_elements=len(title_list)
 		print(total_elements)
 		
 		return render_template('explore.html',title_list=title_list,description_list=description_list,
 			urls_headlines=urls_headlines,total_elements=total_elements)
-
 	else:
 		return render_template("explore.html",nm="saurabh")
-
 			
 """
 
 
-
+import datetime
 @app.route("/explore",methods=['GET','POST'])
 def  explore():
-	if request.method == 'POST':
-		search_word=request.form['search_query']
-		print(search_word)
-		top_headlines = newsapi.get_everything(q=search_word,sort_by='relevancy',           
-                                          language='en',)
-		count_of_headlines=top_headlines['totalResults']
-		count_of_headlines=int(count_of_headlines)
-		title_list=[]
-		description_list=[]
-		urls_headlines=[]
+    if request.method == 'POST':
+        search_word=request.form['search_query']
+        startfrom = request.form['startfrom']
+        startfrom = str(startfrom)
+        entered_date = startfrom.split("-")
+        current_time = datetime.datetime.now()
+        print(startfrom)
+        if(int(entered_date[0])!= int(current_time.year) or int(entered_date[1]) != int(current_time.month)):
+            startfrom = str(current_time.year) + "-0" + str(current_time.month) + "-" + "01"
+        top_headlines = newsapi.get_everything(q=search_word,sort_by='relevancy',           
+                                language='en',from_param=str(startfrom))
+        count_of_headlines=top_headlines['totalResults']
+        count_of_headlines=int(count_of_headlines)
+        title_list=[]
+        description_list=[]
+        urls_headlines=[]
 
-		for headline in top_headlines['articles']:
-			title_list.append(headline['title'])
-			description_list.append(headline['description'])
-			urls_headlines.append(headline['url'])
+        for headline in top_headlines['articles']:
+            title_list.append(headline['title'])
+            description_list.append(headline['description'])
+            urls_headlines.append(headline['url'])
 
 
-		total_elements=[]
-		for i in range(len(title_list)):
-			total_elements.append(i)
-		print(total_elements)
-		
-		return render_template('explore.html',title_list=title_list,description_list=description_list,
-			urls_headlines=urls_headlines,total_elements=total_elements)
+        total_elements=[]
+        for i in range(len(title_list)):
+            total_elements.append(i)
+        print(total_elements)
 
-	else:
-		if request.method=='GET':
-			return render_template("explore.html")
+        return render_template('explore.html',title_list=title_list,description_list=description_list,
+        urls_headlines=urls_headlines,total_elements=total_elements)
+
+    else:
+        return render_template("explore.html")
 
 
 
