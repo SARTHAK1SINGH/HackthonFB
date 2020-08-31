@@ -3,3 +3,4 @@ Flask-SQLAlchemy==2.4.0
 pandas
 Flask-Dance
 wit
+newsapi-python==0.2.6
