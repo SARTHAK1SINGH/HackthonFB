@@ -338,7 +338,7 @@ def  explore():
         tweets = api.search(keyword, count=50, lang='en', exclude='retweets',tweet_mode='extended', since=startfrom_twitter)
         tweet_sentiments = []
         for i in tweets:
-			processed_tweet = preprocessor.clean(i.full_text)
+            processed_tweet = preprocessor.clean(i.full_text)
             review_msg = client.message(processed_tweet[:280]) 
             if(review_msg["traits"] != {}):
                 tweet_sentiments.append([processed_tweet, review_msg["traits"]["wit$sentiment"][0]["value"]])
