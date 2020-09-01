@@ -154,17 +154,6 @@
           position: relative;
           display: inline-block;
         }
-        .ui-autocomplete {
-            max-height: 215px;
-            max-width: 240px;
-            overflow-y: auto;
-            /* prevent horizontal scrollbar */
-            overflow-x: hidden;
-            /* add padding to account for vertical scrollbar */
-            padding-right: 20px;
-            color: rgb(228, 218, 203);
-            background-color: rgb(0, 0, 0);
-        }
         
         hr{
               background: linear-gradient(
@@ -179,55 +168,51 @@
           #jumbo
           {
             padding: 10px;
-          }
-          #newsres
-          {
+             height: 70vh;
             justify-content: center;
             text-align: center;
             align-items: center;
             border: 2px solid white;
-            margin: 10px;
-            margin-bottom: 40px;
-            background-color: black;
-            width: 48%;
-            display: inline-block;
-            box-shadow: 0 25px 10px 0 rgba(233, 236, 236, 0.3);
+            box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
           }
-            @media (max-width: 1125px)
-        {
-            #newsres
-            {
-              justify-content: center;
-              text-align: center;
-              align-items: center;
-              border: 2px solid white;
-              margin: 10px;
-              margin-bottom: 40px;
-              background-color: black;
-              width: 45%;
-            display: inline-block;
-            box-shadow: 0 25px 10px 0 rgba(233, 236, 236, 0.3);
+          
+          th {
+              background-color: rgb(59, 53, 53);
+              position: sticky;
+              top: 0; /* Don't forget this, required for the stickiness */
+              box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+
             }
+            @media (max-width: 995px)
+        {
+            #jumbo
+          {
+            padding: 10px;
+             height: auto;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border: 2px solid white;
+            box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
+            
+          }
         }
 
-          @media (max-width: 665px)
+          @media (max-width: 765px)
         {
             .title{
                 font-size: 45px;
             }
-            #newsres
-            {
-              justify-content: center;
-              text-align: center;
-              align-items: center;
-              border: 2px solid white;
-              margin: auto;
-              margin-bottom: 30px;
-              background-color: black;
-              width: 90%;
-              display: block;
-              box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
-            }
+             #jumbo
+          {
+            padding: 10px;
+             height: auto;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border: 2px solid white;
+            box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
+          }
         }
         @media (max-width: 400px)
         {
@@ -235,21 +220,22 @@
                 font-size: 38px;
                 max-width: 22rem;
             }
-            #newsres
-            {
-              justify-content: center;
-              text-align: center;
-              align-items: center;
-              border: 2px solid white;
-              margin: auto;
-              margin-bottom: 40px;
-              background-color: black;
-              width: 90%;
-              display: block;
-              box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
-            }
+             #jumbo
+          {
+            padding: 10px;
+             height: auto;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border: 2px solid white;
+            box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
+          }
         }
     </style>
+
+
+
+
 
 <script>
     function myFunction() {
@@ -257,6 +243,7 @@
       var x = document.getElementById("snackbar");
       x.className = "show";
       setTimeout(function(){ x.className = x.className.replace("show", ""); }, 20000);
+      
     }
 
   
@@ -374,9 +361,6 @@ voiceactivation();
       <li class="nav-item">
         <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Compare 2 of your medicines"  href="{{url_for('compare')}}"><b>Comapre Meds</b></a>
       </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <li class="nav-item">
-       <a  data-toggle="tooltip" data-placement="bottom" title=" See Search History" style="color:rgb(115, 216, 216);" href="{{url_for('history')}}"><b>History</b></a>
-      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Let Us Help YOU">
         <a style="color: rgb(115, 216, 216);" type="button"  id="Help"  data-toggle="modal" data-target="#exampleModalCenter"><b>Help</b></a>
       </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -411,45 +395,71 @@ voiceactivation();
         </div>
 
 
-
-{%for tweet,sentiment in tweet_sentiments%}
-<table class="table" style="color:white">
-<tr>
-    <td> {{tweet}} </td>
-    <td> {{sentiment}} </td>
-</tr>
-<table>
-{%endfor%}
+<div id="snackbar">
+        <div class="spinner-border spinner-border-sm text-warning" role="status">
+          <span class="sr-only">Loading...</span> 
+        </div> Analyzing reviews on twitter and News, might take some time
+    </div>
 
 
+
+
+{%if tweet_sentiments%}
+<div class="container-fluid" id="graphs">   
+  <div class="row">
+
+    <div id="text" class="col-sm-6" style="border: inset;border-radius: 5px;border-color: rgb(129, 127, 127); max-height: 100vh; overflow-y: auto; overflow-x: hidden;" >
+      
+      <table class="table" style=" color: rgb(228, 218, 203); background-color: rgb(0, 0, 0);">
+      <tr>
+            <th style="max-width: 60%;">Results</th>
+            <th >Sentiment</th>
+            </tr>
+      {%for tweet,sentiment in tweet_sentiments%}
+       <tr>
+          <td style="max-width: 60%;"> {{tweet}} </td>
+          <td > {{sentiment}} &nbsp; <i style="color: rgb(53, 158, 158);" class="fa fa-twitter" aria-hidden="true"></i> </td>
+      </tr>
+      {%endfor%}
+      </table>
+      
+    </div>
+
+    <div class="col-sm-6">
+            <h1>Graph chahiye mere ko yha pe laaake do nhi sare VR mere hai !!!!!!</h1>
+            <canvas id="graph2" width="350" height="450"></canvas>
+    </div>
+  </div>
+</div>
+{%endif%}
+    <br>
+    <br>
+
+{%if total_elements%}
+
+<hr><h1 style="text-align: center;"> Latest News </h1><hr>
+
+<div class="container-fluid" id="graphs">   
+  <div class="row">
 {% for index in total_elements  %}
 
-
-<div id="newsres">
-<div class="jumbotron " id="jumbo" style="background-color: black;">
-  <h1 style="font-family: Share Tech Mono, monospace;" >{{title_list[index]}}</h1>
+<div class="col-lg-3 col-md-6 col-sm-12">
+<div class="jumbotron "  id="jumbo" style="background-color: black;">
+  <h4 style="font-family: Share Tech Mono, monospace;" >{{title_list[index]}}</h4>
   <hr class="my-2">
-  <p style="font-family: sans-serif;" class="lead">{{description_list[index]}}</p>
+  <p style="font-family: sans-serif; font-size: 0.8rem;" class="lead">{{description_list[index]}}</p>
   
  
-  <a style="color: rgb(115, 216, 216); text-decoration: none; font-size: 2rem;" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'" class="btn btn-lg" href="{{urls_headlines[index]}}" role="button">Read more</a>
+  <a style="color: rgb(115, 216, 216); text-decoration: none; font-size: 1rem;" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'" class="btn btn-lg" href="{{urls_headlines[index]}}" role="button">Read more</a>
 </div>
-
-</div>
+ </div>
 {% endfor %}
+</div>
+</div>
 
-{%if tweets%}
-<h1> Tweets </h1>
-{% for i in tweets %}
-    <div id="newsres">
-        <div class="jumbotron " id="jumbo" style="background-color: black;">
-        <h1 style="font-family: Share Tech Mono, monospace;" >{{i.created_at}}</h1>
-        <hr class="my-2">
-        <p style="font-family: sans-serif;" class="lead">{{i.full_text}}</p>    
-        </div>
-    </div>
-{%endfor%}
 {%endif%}
+
+
 
  
     <!-- Optional JavaScript -->
