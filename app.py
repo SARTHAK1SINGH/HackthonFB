@@ -313,12 +313,14 @@ def  explore():
 
 
 import datetime
+import preprocessor
 @app.route("/explore",methods=['GET','POST'])
 def  explore():
     if request.method == 'POST':
         search_word=request.form['search_query']
         startfrom = request.form['startfrom']
         startfrom = str(startfrom)
+        startfrom_twitter = startfrom
         entered_date = startfrom.split("-")
         current_time = datetime.datetime.now()
         print(startfrom)
@@ -333,8 +335,13 @@ def  explore():
         urls_headlines=[]
         keyword = search_word
         ##twitter tweets
-        tweets = api.search(keyword, count=20, lang='en', exclude='retweets',tweet_mode='extended', since=startfrom)
-        
+        tweets = api.search(keyword, count=50, lang='en', exclude='retweets',tweet_mode='extended', since=startfrom_twitter)
+        tweet_sentiments = []
+        for i in tweets:
+            processed_tweet = preprocessor.clean(i.full_text)
+            review_msg = client.message(processed_tweet[:280]) 
+            if(review_msg["traits"] != {}):
+                tweet_sentiments.append([processed_tweet, review_msg["traits"]["wit$sentiment"][0]["value"]])
         for headline in top_headlines['articles']:
             title_list.append(headline['title'])
             description_list.append(headline['description'])
@@ -347,7 +354,7 @@ def  explore():
         print(total_elements)
 
         return render_template('explore.html',title_list=title_list,description_list=description_list,
-        urls_headlines=urls_headlines,total_elements=total_elements, tweets = tweets)
+        urls_headlines=urls_headlines,total_elements=total_elements, tweets = tweets, tweet_sentiments=tweet_sentiments)
 
     else:
         return render_template("explore.html")

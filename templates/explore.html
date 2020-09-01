@@ -412,6 +412,16 @@ voiceactivation();
 
 
 
+{%for tweet,sentiment in tweet_sentiments%}
+<table class="table" style="color:white">
+<tr>
+    <td> {{tweet}} </td>
+    <td> {{sentiment}} </td>
+</tr>
+<table>
+{%endfor%}
+
+
 {% for index in total_elements  %}
 
 
