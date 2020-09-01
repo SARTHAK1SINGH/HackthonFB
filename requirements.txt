@@ -4,3 +4,5 @@ pandas
 Flask-Dance
 wit
 newsapi-python==0.2.6
+tweepy
+tweet-preprocessor
