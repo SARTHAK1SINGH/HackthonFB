@@ -189,10 +189,18 @@
             margin: 10px;
             margin-bottom: 40px;
             background-color: black;
-            width: 48%;
+            width: 22%;
+            height: 40vh;
             display: inline-block;
             box-shadow: 0 25px 10px 0 rgba(233, 236, 236, 0.3);
           }
+          th {
+              background-color: rgb(59, 53, 53);
+              position: sticky;
+              top: 0; /* Don't forget this, required for the stickiness */
+              box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+
+            }
             @media (max-width: 1125px)
         {
             #newsres
@@ -204,7 +212,8 @@
               margin: 10px;
               margin-bottom: 40px;
               background-color: black;
-              width: 45%;
+              width: 30%;
+              height: 40vh;
             display: inline-block;
             box-shadow: 0 25px 10px 0 rgba(233, 236, 236, 0.3);
             }
@@ -251,12 +260,17 @@
         }
     </style>
 
+
+
+
+
 <script>
     function myFunction() {
       console.log("myfunction is called");
       var x = document.getElementById("snackbar");
       x.className = "show";
       setTimeout(function(){ x.className = x.className.replace("show", ""); }, 20000);
+      
     }
 
   
@@ -411,45 +425,54 @@ voiceactivation();
         </div>
 
 
+<div class="container-fluid" id="graphs">   
+  <div class="row">
 
-{%for tweet,sentiment in tweet_sentiments%}
-<table class="table" style="color:white">
-<tr>
-    <td> {{tweet}} </td>
-    <td> {{sentiment}} </td>
-</tr>
-<table>
-{%endfor%}
+    <div id="text" class="col-sm-6" style="border: inset;border-radius: 5px;border-color: rgb(129, 127, 127); max-height: 100vh; overflow-y: auto; overflow-x: hidden;" >
+      
+      <table class="table" style=" color: rgb(228, 218, 203); background-color: rgb(0, 0, 0);">
+      <tr>
+            <th style="max-width: 60%;">Results</th>
+            <th >Sentiment</th>
+            </tr>
+      {%for tweet,sentiment in tweet_sentiments%}
+       <tr>
+          <td style="max-width: 60%;"> {{tweet}} </td>
+          <td > {{sentiment}} &nbsp; <i style="color: rgb(36, 119, 119);" class="fa fa-twitter" aria-hidden="true"></i> </td>
+      </tr>
+      {%endfor%}
+      </table>
+      
+    </div>
 
+    <div class="col-sm-6">
+            <h1>Graph chahiye mere ko yha pe laaake do nhi sare VR mere hai !!!!!!</h1>
+            <canvas id="graph2" width="350" height="450"></canvas>
+    </div>
+  </div>
+</div>
+    <br>
+    <br>
 
+{%if total_elements%}
+<hr><h1 style="text-align: center;"> Latest News </h1><hr>
 {% for index in total_elements  %}
-
 
 <div id="newsres">
 <div class="jumbotron " id="jumbo" style="background-color: black;">
-  <h1 style="font-family: Share Tech Mono, monospace;" >{{title_list[index]}}</h1>
+  <h4 style="font-family: Share Tech Mono, monospace;" >{{title_list[index]}}</h4>
   <hr class="my-2">
-  <p style="font-family: sans-serif;" class="lead">{{description_list[index]}}</p>
+  <p style="font-family: sans-serif; font-size: 0.8rem;" class="lead">{{description_list[index]}}</p>
   
  
-  <a style="color: rgb(115, 216, 216); text-decoration: none; font-size: 2rem;" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'" class="btn btn-lg" href="{{urls_headlines[index]}}" role="button">Read more</a>
+  <a style="color: rgb(115, 216, 216); text-decoration: none; font-size: 1rem;" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'" class="btn btn-lg" href="{{urls_headlines[index]}}" role="button">Read more</a>
 </div>
 
 </div>
 {% endfor %}
-
-{%if tweets%}
-<h1> Tweets </h1>
-{% for i in tweets %}
-    <div id="newsres">
-        <div class="jumbotron " id="jumbo" style="background-color: black;">
-        <h1 style="font-family: Share Tech Mono, monospace;" >{{i.created_at}}</h1>
-        <hr class="my-2">
-        <p style="font-family: sans-serif;" class="lead">{{i.full_text}}</p>    
-        </div>
-    </div>
-{%endfor%}
 {%endif%}
+
+
 
  
     <!-- Optional JavaScript -->
