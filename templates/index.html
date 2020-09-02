@@ -33,14 +33,13 @@
         body{
             margin: 0;
             padding: 0;
-            background-color: black;
+            background-color: #212121;
             color: rgb(250, 239, 221);
         }
         .landing-page
         {
             width: 100%;
             height: 100vh;
-            background-color: #212121;
             /*background: linear-gradient(
             to right,
             #636261 0%,
@@ -144,12 +143,22 @@
             .title{
                 font-size: 60px;
             }
+            .nav-img
+            {
+              width: 40px;
+              height: 40px;
+            }
         }
         @media (max-width: 400px)
         {
             .title{
                 font-size: 45px;
                 max-width: 22rem;
+            }
+            .nav-img
+            {
+              width: 40px;
+              height: 40px;
             }
         }
         hr{
@@ -258,7 +267,7 @@ voiceactivation();
 <!-- nav-bar top -->
 
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <a style="color: #edbeb2;" class="navbar-brand" href="/"><img src="https://i.ibb.co/RysHgz0/Logo-Makr-4e-Uz1-U.png"  alt="Cure-Mate"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a style="color: #edbeb2;" class="navbar-brand" href="/"><img class="nav-img" src="https://i.ibb.co/RysHgz0/Logo-Makr-4e-Uz1-U.png"  alt="Cure-Mate"></a>&nbsp;&nbsp;&nbsp;&nbsp;
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
