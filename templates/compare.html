@@ -75,6 +75,13 @@
               height: 1px;
           }
 
+          #graph_btn{
+            border: 2px solid #eb5b34;
+          }
+           #comparison_btn{
+            border: 2px solid #212121;
+          }
+
 </style>
 
 </head>
@@ -100,18 +107,22 @@
   </div>
 </nav>
 <hr> <br><br><br>
+
+<h2 style="text-align: center; color: white">Compare Two medicines and know which one is best for you !! </h2>
+
+
     <div class="workplace">
         <form method ="POST" action="/compare">
-            <div class="form-group autocomplete"><input name ="med1" id="medicine" value="{{med1}}" class="form-control" type = "text" placeholder="first Medicine..." style="border-radius:0; width: 300p;" required/></div>
-            <div class="form-group autocomplete"><input  name="med2" value="{{med2}}" id="medicine2" class="form-control" placeholder="second Medicine..." type="text" style="border-radius:0; width: 300p; " required/></div>
+            <div class="form-group autocomplete"><input name ="med1" id="medicine" value="{{med1}}" class="form-control" type = "text" placeholder="First Medicine..." style="border-radius:0; width: 300p;" required/></div>
+            <div class="form-group autocomplete"><input  name="med2" value="{{med2}}" id="medicine2" class="form-control" placeholder="Second Medicine..." type="text" style="border-radius:0; width: 300p; " required/></div>
             <br><input class="btn" type="submit" value="let's compare" style="background-color:#eb5b34;border-radius:0; color:white"/>
         </form>
     </div>
 <br><br><br>
 {% if show %}
  <div style="text-align:center;justify-content:center">
-  <button  class="btn btn-link" onclick="openCity('graph')"><span style="font-size:20px;color:#eb5b34">graph</span></button>&nbsp;&nbsp;&nbsp;&nbsp;nbsp;&nbsp;&nbsp;&nbsp;
-  <button class="btn btn-link"  onclick="openCity('sideby')"><span style="font-size:20px;color:#eb5b34">side by side</span></button>
+  <button  class="btn" id="graph_btn" onclick="openCity('graph')"><span style="font-size:20px;color:#eb5b34">Graph</span></button>&nbsp;&nbsp;&nbsp;&nbsp;nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="btn"  id="comparison_btn" onclick="openCity('sideby')"><span style="font-size:20px;color:#eb5b34">Comparison Table</span></button>
   <hr><br>
   <div class="compare-graph">
     <div id="graph" class="city">
@@ -119,6 +130,7 @@
             <div class="container-fluid" id="graphs">   
                 <div class="row" style="justify-content:center;align-items:center;text-align:center">
                     <div class="col-sm-6">
+                        <h2 style="color: white"> Comparison between <span style="color: #eb5b34">{{med1}}</span> and <span style="color: #eb5b34">{{med2}} </span> : </h2>
                     <canvas id="graph1"  height="400"></canvas>
                     </div>
                 </div>
@@ -132,8 +144,8 @@
             <thead>
                 <tr>
                 <th scope="col">Property</th>
-                <th scope="col">Medicine I</th>
-                <th scope="col">Medicine II</th>
+                <th scope="col">Medicine I : {{med1}}</th>
+                <th scope="col">Medicine II : {{med2}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -171,6 +183,19 @@
             x[i].style.display = "none";  
         }
         document.getElementById(cityName).style.display = "block";  
+
+        if(cityName=="graph")
+        {
+            document.getElementById("graph_btn").style.borderColor="#eb5b34";
+            document.getElementById("comparison_btn").style.borderColor="#212121"; 
+        }
+        else
+        {
+         document.getElementById("comparison_btn").style.borderColor="#eb5b34";  
+         document.getElementById("graph_btn").style.borderColor="#212121"; 
+        }
+    
+        
         }
     </script>
     
@@ -186,8 +211,8 @@
         labels: ["positive", "negative", "neutral"],
         datasets: [
             {
-                label: "medicine1",
-                backgroundColor: "#588cf5",
+                label: "{{med1}}",
+                backgroundColor: "#ffffff",
                 data: [
                     {%for  i in med1_data%}
                         {{i}},
@@ -195,8 +220,8 @@
                 ]
             },
             {
-                label: "medicine2",
-                backgroundColor: "#f29191",
+                label: "{{med2}}",
+                backgroundColor: "#eb5b34",
                 data: [{%for  i in med2_data%}
                         {{i}},
                     {%endfor%}]
