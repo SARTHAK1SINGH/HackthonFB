@@ -102,8 +102,8 @@ url2 = 'https://drive.google.com/file/d/18oXt6odrqNYHGL6cCWltX0DKFahes_gu/view?u
 path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
 
 
-df_train = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\only programmig\\drugsComTrain_raw.csv")
-df_test = pd.read_csv("C:\\Users\\Lenovo\\Desktop\\only programmig\\drugsComTest_raw.csv")
+df_train = pd.read_csv(path1)
+df_test = pd.read_csv(path2)
 
 
 ## don't mess with the following code, out of ur reach
@@ -337,11 +337,20 @@ def  explore():
         ##twitter tweets
         tweets = api.search(keyword, count=50, lang='en', exclude='retweets',tweet_mode='extended', since=startfrom_twitter)
         tweet_sentiments = []
+        demo2 = []
+        demo1 = []
         for i in tweets:
             processed_tweet = preprocessor.clean(i.full_text)
             review_msg = client.message(processed_tweet[:280]) 
             if(review_msg["traits"] != {}):
+                #demo1.append(int(str(i.created_at)[9:11]))
                 tweet_sentiments.append([processed_tweet, review_msg["traits"]["wit$sentiment"][0]["value"]])
+                if(review_msg["traits"]["wit$sentiment"][0]["value"] == "positive"):
+                    demo2.append(1)
+                elif(review_msg["traits"]["wit$sentiment"][0]["value"] == "negative"):
+                    demo2.append(-1)
+                else:
+                    demo2.append(0)
         for headline in top_headlines['articles']:
             title_list.append(headline['title'])
             description_list.append(headline['description'])
@@ -353,11 +362,11 @@ def  explore():
             total_elements.append(i)
         print(total_elements)
         #x axis -> time -> demo1
-        demo1=[1,2,3,5,6,7]
+        demo1=[i + 1 for i in range(len(demo2))]
         #y axis -> rating (1->pos , 0->neutral , -1->negative) -> demo2
-        demo2=[1,0,-1,0,0,-1]
+       # demo2=[1,0,-1,0,0,-1]
         #size of x axis
-        size_demo=[0,1,2,3,4,5] #store 0 to len(demo1)-1 in size_demo
+        size_demo=[i for i in range(len(demo1))] #store 0 to len(demo1)-1 in size_demo
 
         return render_template('explore.html',title_list=title_list,description_list=description_list,
         urls_headlines=urls_headlines,total_elements=total_elements, tweets = tweets, tweet_sentiments=tweet_sentiments,demo1=demo1,size_demo=size_demo,demo2=demo2)
