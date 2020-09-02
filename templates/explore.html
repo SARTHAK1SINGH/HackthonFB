@@ -253,7 +253,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
     text: "Sentiment analysis of Tweets"
   },
   axisX: {
-    title:"Time",
+    title:"Frequency of tweets",
     minimum: 0,
     maximum: 20
   },
@@ -469,20 +469,27 @@ voiceactivation();
       
     </div>
 
-
-<!--Graph
-    <div class="col-sm-6">
-            <h1>Graph chahiye mere ko yha pe laaake do nhi sare VR mere hai !!!!!!</h1>
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-            <div id="chartContainer" style="height: 350px; width: 350px;"></div>
-         <canvas id="graph2" width="350" height="450"></canvas>-->
-  <!--  </div>
--->
  <div class="col-sm-6">
-  <h4> Scatter plot for tweets related to the search keyword </h4>
+  <h4 style="color: #00c8ff"> Scatter plot for tweets related to the search keyword:</h4>
 <div id="chartContainer" style="height: 400px; width: 100%; margin-top: 30px"></div>
 <br>
+<br>
+<h4> Overview of tweets: </h4>
+<ul>
+<li><h4>{{rev_list_precent[0]}} % of <span style="color:green;margin-left: 10px"> Positive</span> reviews</h4></li>
+
+<li><h4>{{rev_list_precent[1]}} % of <span style="color: red; margin-left: 10px">Negative</span> reviews</h4></li>
+
+
+<li><h4>{{rev_list_precent[2]}} % of <span style="color: #00c8ff;margin-left: 10px">Neutral</span> reviews</h4></li>
+</ul>
 </div>
+
+
+
+
+
+
 
   </div>
 
