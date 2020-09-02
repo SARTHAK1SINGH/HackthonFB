@@ -352,9 +352,15 @@ def  explore():
         for i in range(len(title_list)):
             total_elements.append(i)
         print(total_elements)
+        #x axis -> time -> demo1
+        demo1=[1,2,3,5,6,7]
+        #y axis -> rating (1->pos , 0->neutral , -1->negative) -> demo2
+        demo2=[1,0,-1,0,0,-1]
+        #size of x axis
+        size_demo=[0,1,2,3,4,5] #store 0 to len(demo1)-1 in size_demo
 
         return render_template('explore.html',title_list=title_list,description_list=description_list,
-        urls_headlines=urls_headlines,total_elements=total_elements, tweets = tweets, tweet_sentiments=tweet_sentiments)
+        urls_headlines=urls_headlines,total_elements=total_elements, tweets = tweets, tweet_sentiments=tweet_sentiments,demo1=demo1,size_demo=size_demo,demo2=demo2)
 
     else:
         return render_template("explore.html")
