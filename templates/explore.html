@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -26,7 +29,7 @@
 
 
 
-
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
 
@@ -237,6 +240,47 @@
 
 
 
+
+
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+  animationEnabled: true,
+  zoomEnabled: true,
+  title:{
+    text: "Sentiment analysis of Tweets"
+  },
+  axisX: {
+    title:"Time",
+    minimum: 0,
+    maximum: 10
+  },
+  axisY:{
+    title: "Rating",
+   // valueFormatString: "$#,##0k"
+  },
+  data: [{
+    type: "scatter",
+  //  toolTipContent: "<b>Area: </b>{x} sq.ft<br/><b>Price: </b>${y}k",
+    dataPoints: [
+      {%for i in size_demo%}
+      {x:{{demo1[i]}},y:{{demo2[i]}}},
+      {% endfor  %}
+     
+     // { x: 2250, y: 0 }
+    ]
+  }]
+});
+chart.render();
+
+}
+</script>
+
+
+
+
 <script>
     function myFunction() {
       console.log("myfunction is called");
@@ -425,12 +469,30 @@ voiceactivation();
       
     </div>
 
+
+<!--Graph
     <div class="col-sm-6">
             <h1>Graph chahiye mere ko yha pe laaake do nhi sare VR mere hai !!!!!!</h1>
-            <canvas id="graph2" width="350" height="450"></canvas>
-    </div>
-  </div>
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            <div id="chartContainer" style="height: 350px; width: 350px;"></div>
+         <canvas id="graph2" width="350" height="450"></canvas>-->
+  <!--  </div>
+-->
+ <div class="col-sm-6">
+  <h4> Scatter plot for tweets related to the search keyword </h4>
+<div id="chartContainer" style="height: 370px; width: 100%; margin-top: 30px"></div>
+<br>
+<br>
+<p>Total Positive reviews: </p>
+<p>Total Negative reviews: </p>
+<p>Total Neutral reviews: </p>
 </div>
+
+  </div>
+
+
+</div>
+
 {%endif%}
     <br>
     <br>
