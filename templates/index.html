@@ -52,7 +52,7 @@
         }
         .header{
             height: 90vh;
-            margin-top: -50px;
+            margin-top: -30px;
             color: white;
             background-size: cover;
             display: flex;
@@ -61,36 +61,15 @@
             font-family: "Share Tech Mono", monospace;
         }
         .title{
-            margin-bottom: 50px;
-            font-size: 80px;
-            letter-spacing: 3px;
-            font-family: fantasy;
+            font-size: 100px;
+            color: #eb5b34;
             max-width: 50rem;
-            text-transform: uppercase;
+            margin: auto;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            background: linear-gradient(
-            to right,
-            rgba(249,105,14,1) 0%,
-            rgba(102,51,153,1) 100%
-            );
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 5s steps(27);
-            width: 27ch;
         }
-        @keyframes typing 
-        {
-            0%{
-                width: 0ch;
-                color: rgba(249,105,14,1);
-            }
-            100%{
-                width: 27ch;
-            }
-        }
+        
 
         
         .formbox{
@@ -163,13 +142,13 @@
         @media (max-width: 665px)
         {
             .title{
-                font-size: 45px;
+                font-size: 60px;
             }
         }
         @media (max-width: 400px)
         {
             .title{
-                font-size: 38px;
+                font-size: 45px;
                 max-width: 22rem;
             }
         }
@@ -288,13 +267,13 @@ voiceactivation();
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
        <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title=" See Search History"  href="{{url_for('history')}}"><b>History</b></a>
-      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Let Us Help YOU">
         <a style="color: rgb(115, 216, 216);" type="button"  id="Help"  data-toggle="modal" data-target="#exampleModalCenter"><b>Help</b></a>
-      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class="nav-item">
         <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Compare 2 of your medicines"  href="{{url_for('compare')}}"><b>Comapre Meds</b></a>
-      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <li class="nav-item">
         <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Let's Give you Sentiments/Latest news on your topic"  href="{{url_for('explore')}}"><b>Monitoring</b></a>
       </li>&nbsp;&nbsp;&nbsp;
@@ -316,7 +295,7 @@ voiceactivation();
         <div class="header">
             <form autocomplete="off"  method = "POST" action = "/">
 
-                <h1 class="title"> Cure-Mate <i class="fa fa-heartbeat" aria-hidden="true"></i></h1>
+                <h1 style="font-family: fantasy;" class="title"> <img style="height: 65%; width: 80%; margin-bottom: 20px;" src="https://drive.google.com/uc?id=1nBTX7WSwbbG4cVy6Cp_kEYnz-klcbSwS" alt="Cure-Mate 🧡"></h1>
                 <div class="formbox" id="formbox">
                     <div class="form-group autocomplete">
                     <label for="exampleInputEmail1">Disease</label>
