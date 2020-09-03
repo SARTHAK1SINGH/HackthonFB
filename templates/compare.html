@@ -110,7 +110,6 @@
 
 <h2 style="text-align: center; color: white">Compare Two medicines and know which one is best for you !! </h2>
 
-
     <div class="workplace">
         <form method ="POST" action="/compare">
             <div class="form-group autocomplete"><input name ="med1" id="medicine" value="{{med1}}" class="form-control" type = "text" placeholder="First Medicine..." style="border-radius:0; width: 300p;" required/></div>
@@ -131,6 +130,8 @@
                 <div class="row" style="justify-content:center;align-items:center;text-align:center">
                     <div class="col-sm-6">
                         <h2 style="color: white"> Comparison between <span style="color: #eb5b34">{{med1}}</span> and <span style="color: #eb5b34">{{med2}} </span> : </h2>
+                        <br>
+                        <br>
                     <canvas id="graph1"  height="400"></canvas>
                     </div>
                 </div>
@@ -212,7 +213,7 @@
         datasets: [
             {
                 label: "{{med1}}",
-                backgroundColor: "#ffffff",
+                backgroundColor: "rgba(255, 0, 0,0.8)",
                 data: [
                     {%for  i in med1_data%}
                         {{i}},
@@ -221,7 +222,7 @@
             },
             {
                 label: "{{med2}}",
-                backgroundColor: "#eb5b34",
+                backgroundColor: "rgba(64, 0, 255,0.8)",
                 data: [{%for  i in med2_data%}
                         {{i}},
                     {%endfor%}]
