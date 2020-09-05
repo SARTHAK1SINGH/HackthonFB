@@ -18,7 +18,7 @@
 ```python -m flask run```  <hr><hr>
 
 ## See Live on
-[Click here: Cure-Mate](https://curemate.herokuapp.com/)
+<a href="https://curemate.herokuapp.com/" target="_blank">Click here: Cure-Mate</a>
 
 <hr><hr>
 
