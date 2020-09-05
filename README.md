@@ -1,5 +1,30 @@
 # HackthonFB
 
+## Requirements
+**Install these using**  ```pip install```
+
+> Python3 <br>
+> Flask==1.0.2 <br>
+> Flask-SQLAlchemy==2.4.0 <br>
+> pandas <br>
+> Flask-Dance <br>
+> wit <br>
+> newsapi-python==0.2.6 <br>
+> tweepy <br>
+> tweet-preprocessor 
+<hr><hr>
+
+## To Run Server 
+```python -m flask run```  <hr><hr>
+
+## See Live on
+[Click here: Cure-Mate](https://curemate.herokuapp.com/)
+
+<hr><hr>
+
+
+![Annotation 2020-09-03 180801](https://user-images.githubusercontent.com/44469087/92303912-1040be00-ef97-11ea-9721-21c8f50656e2.png)
+
 # Cure-Mate 🏥
 
 ### Sentiment analysis of user reviews for particular disease and medicine Using Wit.Ai <br><br>
