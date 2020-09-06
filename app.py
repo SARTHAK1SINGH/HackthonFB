@@ -105,9 +105,6 @@ path2 = 'https://drive.google.com/uc?export=download&id='+url2.split('/')[-2]
 df_train = pd.read_csv(path1)
 df_test = pd.read_csv(path2)
 
-
-
-
 ## don't mess with the following code, out of ur reach
 df_all = pd.concat([df_train,df_test])
 
@@ -285,6 +282,11 @@ def profile():
 	email=resp.json()["email"]
 	picture = resp.json()["picture"]
 	return render_template('profile.html', name=name, email=email, picture=picture)
+
+
+@app.route("/chatbot")
+def chatbot():
+	return render_template('chatbot.html')
 
 """
 @app.route("/explore",methods=['GET','POST'])
