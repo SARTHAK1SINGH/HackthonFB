@@ -23,13 +23,15 @@
 <hr><hr>
 
 
-![Annotation 2020-09-03 180801](https://user-images.githubusercontent.com/44469087/92303912-1040be00-ef97-11ea-9721-21c8f50656e2.png)
+![Annotation 2020-09-06 153803](https://user-images.githubusercontent.com/44469087/92323506-03839f00-f057-11ea-9cc3-c631f5cffafa.png)
+
 
 # Cure-Mate 🏥
 
-### Sentiment analysis of user reviews for particular disease and medicine Using Wit.Ai <br><br>
+### Sentiment analysis of user reviews for particular disease and medicine Using Wit.Ai with Covid-19 Chatbot <br><br>
 We are trying to give the user fair information about what others think about that medicine he is using and what other <br> best-rated medicines suggested for this particular disease and User can also compare two Medicines to know the best one.<br>
-We are using the UCI drug review dataset for getting reviews having more than 2 million reviews.
+We are using the UCI drug review dataset for getting reviews having more than 2 million reviews.<br>
+We have implemented a chatbot for all your queries on Covid-19 and it works on both **Messenger** and **Telegram**.
 
 <hr><hr>
 
@@ -69,6 +71,12 @@ You can see what's going on recently or the history of medicine. For the section
 Available with both  **⌨️Typing Search** &  **🎙️Voice Search**
 
 ![Annotation 2020-09-03 181155](https://user-images.githubusercontent.com/44469087/92116657-bcf13300-ee11-11ea-8ec2-7c65519efe95.png)
+
+###  ▶️ COVID Chatbot <br>
+A chatbot to solve all your queries regarding the Covid-19 situation and tries to help you in the best possible ways.
+The chatbot works on both **Messenger** and **Telegram**.
+![Annotation 2020-09-06 143520](https://user-images.githubusercontent.com/44469087/92323387-e9958c80-f055-11ea-94e7-6ddb5ffb71b8.png)
+
 ###  ▶️ Speed <br>
 Analyzing 2 million of the dataset in just some seconds. That makes it more User-Friendly and Time-Efficient.
 
@@ -76,7 +84,7 @@ Analyzing 2 million of the dataset in just some seconds. That makes it more User
 
 # Architecture ⚙️ <br>
 This is the overall architecture of our application. on the left side, the red-colored sections are those with which the user interacts and on it right the brief internal working of our application is shown.<br> 
-![Archi](https://user-images.githubusercontent.com/44469087/91657870-5eab1400-eae2-11ea-921d-7f9dc7d10d4e.jpg)
+![WhatsApp Image 2020-09-06 at 3 18 46 PM](https://user-images.githubusercontent.com/44469087/92323221-91aa5600-f054-11ea-94fa-3eef580ca462.jpeg)
 <hr><hr>
 
 # Details of NLP Model 📚 <br>
