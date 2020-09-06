@@ -27,9 +27,10 @@
 
 # Cure-Mate 🏥
 
-### Sentiment analysis of user reviews for particular disease and medicine Using Wit.Ai <br><br>
+### Sentiment analysis of user reviews for particular disease and medicine Using Wit.Ai with Covid-19 Chatbot <br><br>
 We are trying to give the user fair information about what others think about that medicine he is using and what other <br> best-rated medicines suggested for this particular disease and User can also compare two Medicines to know the best one.<br>
 We are using the UCI drug review dataset for getting reviews having more than 2 million reviews.
+We have implemented a chatbot for all your queries on Covid-19 and it work on both **Messenger** and **Telegram**.
 
 <hr><hr>
 
@@ -69,6 +70,12 @@ You can see what's going on recently or the history of medicine. For the section
 Available with both  **⌨️Typing Search** &  **🎙️Voice Search**
 
 ![Annotation 2020-09-03 181155](https://user-images.githubusercontent.com/44469087/92116657-bcf13300-ee11-11ea-8ec2-7c65519efe95.png)
+
+###  ▶️ COVID Chatbot <br>
+A chatbot to solve all your queries regarding the Covid-19 situation and tries to help you in the best possible ways.
+The chatbot works on both **Messenger** and **Telegram**.
+![Annotation 2020-09-06 143520](https://user-images.githubusercontent.com/44469087/92323387-e9958c80-f055-11ea-94e7-6ddb5ffb71b8.png)
+
 ###  ▶️ Speed <br>
 Analyzing 2 million of the dataset in just some seconds. That makes it more User-Friendly and Time-Efficient.
 
