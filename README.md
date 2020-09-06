@@ -29,8 +29,8 @@
 
 ### Sentiment analysis of user reviews for particular disease and medicine Using Wit.Ai with Covid-19 Chatbot <br><br>
 We are trying to give the user fair information about what others think about that medicine he is using and what other <br> best-rated medicines suggested for this particular disease and User can also compare two Medicines to know the best one.<br>
-We are using the UCI drug review dataset for getting reviews having more than 2 million reviews.
-We have implemented a chatbot for all your queries on Covid-19 and it work on both **Messenger** and **Telegram**.
+We are using the UCI drug review dataset for getting reviews having more than 2 million reviews.<br>
+We have implemented a chatbot for all your queries on Covid-19 and it works on both **Messenger** and **Telegram**.
 
 <hr><hr>
 
