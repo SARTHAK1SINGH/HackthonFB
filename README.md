@@ -23,7 +23,8 @@
 <hr><hr>
 
 
-![Annotation 2020-09-03 180801](https://user-images.githubusercontent.com/44469087/92303912-1040be00-ef97-11ea-9721-21c8f50656e2.png)
+![Annotation 2020-09-06 153803](https://user-images.githubusercontent.com/44469087/92323506-03839f00-f057-11ea-9cc3-c631f5cffafa.png)
+
 
 # Cure-Mate 🏥
 
