@@ -76,7 +76,7 @@ Analyzing 2 million of the dataset in just some seconds. That makes it more User
 
 # Architecture ⚙️ <br>
 This is the overall architecture of our application. on the left side, the red-colored sections are those with which the user interacts and on it right the brief internal working of our application is shown.<br> 
-![Archi](https://user-images.githubusercontent.com/44469087/91657870-5eab1400-eae2-11ea-921d-7f9dc7d10d4e.jpg)
+![WhatsApp Image 2020-09-06 at 3 18 46 PM](https://user-images.githubusercontent.com/44469087/92323221-91aa5600-f054-11ea-94fa-3eef580ca462.jpeg)
 <hr><hr>
 
 # Details of NLP Model 📚 <br>
