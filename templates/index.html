@@ -248,7 +248,7 @@ voiceactivation();
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body" style="color:teal">
+          <div class="modal-body" style="color:teal; font-family: sans-serif;">
               <li>First thing first Login With Us if not already.</li>
               <li>Click on <i class="fas fa-microphone fa-2x"></i> Icon in search box for Activating Voice search and fully Voice Automated help.</li>
               <li>To fill disease section say My disease is "Disease name" / Fill it manually</li>
@@ -256,6 +256,7 @@ voiceactivation();
               <li>To Submit say Submit / Click on Analyze</li>
               <li style="color: rgb(104, 51, 7);">To Compare the reviews b/w 2 of you medicins click "Compare meds" In Navbar</li>
               <li style="color: rgb(104, 51, 7);">To get the latest Sentiments/Information on some disease / medicine click on "Monitoring" In Navbar</li>
+              <li style="color: rgb(104, 51, 7);">To get the answers of all your queries on Covid-19 talk to our chatbot by clicking on "Covid Chatbot" In Navbar</li>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
@@ -290,6 +291,9 @@ voiceactivation();
       </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <li class="nav-item">
         <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Let's Give you Sentiments/Latest news on your topic"  href="{{url_for('explore')}}"><b>Monitoring</b></a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Hy there, lets help you with your Covid-19 Quries"  href="{{url_for('chatbot')}}"><b>Covid Chatbot</b></a>
       </li>&nbsp;&nbsp;&nbsp;
     </ul>
     <form class="form-inline my-2 my-lg-0">
