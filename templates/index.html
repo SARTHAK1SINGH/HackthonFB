@@ -327,9 +327,12 @@ voiceactivation();
                     <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #eb5b34; border:none; border-radius:0;height:38px"><i class="fa fa-search" id="submit" style="color:white;"></i> Analyze</button> &nbsp;&nbsp;
 
                      <i style="cursor: pointer; margin-left: 15px;" class="fas fa-microphone fa-2x" id="add_mic" onclick="introduction()"></i>
+                      <br>
+                      <input type="checkbox" name="check1" onclick="dynInput(this);" /> Click to input Symptoms
+                      <p id="insertinputs"></p>
 
                 </div>
-
+                
 
 <!-- Select dataset from Checkboxes -->
 <br>
@@ -392,7 +395,22 @@ voiceactivation();
 </html>
 
 
-
+<script type="text/javascript">
+ function dynInput(cbox) {
+  if (cbox.checked) {
+    var input = document.createElement("textarea");
+    input.rows = "4";
+    input.cols = "40";
+    input.placeholder = "Enter comma-separated symptoms...";
+    var div = document.createElement("div");
+    div.id = cbox.name;
+    div.appendChild(input);
+    document.getElementById("insertinputs").appendChild(div);
+  } else {
+    document.getElementById(cbox.name).remove();
+  }
+}
+</script>
 
 
 <!-- script for checkbox of search data from -->
