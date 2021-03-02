@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/2f32e53da2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/6NDKWyf/Logo-Makr-9m-AUAP.png">
+    <title>The Cure-Mate</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Share+Tech+Mono&display=swap');
+        body{
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: rgb(250, 239, 221);
+        }
+        .landing-page
+        {
+            width: 100%;
+            height: 100vh;
+            background-color: #212121;
+            /*background: linear-gradient(
+            to right,
+            #636261 0%,
+            #212120 100%
+            );*/
+            /* url("background.png") center no-repeat; */
+            background-size: contain;
+            position: relative;
+        }
+        .header{
+            height: 50vh;
+            margin-top: -50px;
+            color: white;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Share Tech Mono", monospace;
+        }
+        .title{
+            margin-bottom: 50px;
+            font-size: 80px;
+            letter-spacing: 3px;
+            font-family: fantasy;
+            max-width: 50rem;
+            text-transform: uppercase;
+            text-align: center;
+            background: linear-gradient(
+            to right,
+            rgba(249,105,14,1) 0%,
+            rgba(102,51,153,1) 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 5s steps(27);
+            width: 27ch;
+        }
+        @keyframes typing 
+        {
+            0%{
+                width: 0ch;
+                color: rgba(249,105,14,1);
+            }
+            100%{
+                width: 27ch;
+            }
+        }
+
+        
+        .formbox{
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .formbox.clicked{
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 20px 30px 0 rgba(31, 230, 230, 0.3);
+        }
+        
+        #snackbar {
+          visibility: hidden;
+          margin-left: -125px;
+          background-color: black;
+          color: #fff;
+          text-align: center;
+          border-radius: 10px;
+          padding: 16px;
+          position: fixed;
+          z-index: 1;
+          left: 80%;
+          bottom: 30px;
+          font-size: 15px;
+        }
+
+        #snackbar.show {
+          visibility: visible;
+          -webkit-animation: fadein 0.5s, fadeout 0.5s 10s;
+          animation: fadein 0.5s, fadeout 0.5s 10s;
+        }
+
+        @-webkit-keyframes fadein {
+          from {bottom: 0; opacity: 0;} 
+          to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+          from {bottom: 0; opacity: 0;}
+          to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+          from {bottom: 30px; opacity: 1;} 
+          to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+          from {bottom: 30px; opacity: 1;}
+          to {bottom: 0; opacity: 0;}
+        }
+        .autocomplete {
+          position: relative;
+          display: inline-block;
+        }
+        
+        hr{
+              background: linear-gradient(
+                  to right,
+                  rgb(104, 103, 102) 0%,
+                  rgba(102,51,153,1) 100%
+
+              );
+              border: 0;
+              height: 1px;
+          }
+          #jumbo
+          {
+            padding: 10px;
+             height: 70vh;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border: 2px solid white;
+            box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
+          }
+          
+          th {
+              background-color: rgb(59, 53, 53);
+              position: sticky;
+              top: 0; /* Don't forget this, required for the stickiness */
+              box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+
+            }
+            .nav-img
+            {
+              width: 50px;
+              height: 50px;
+            }
+
+            @media (max-width: 995px)
+        {
+            #jumbo
+          {
+            padding: 10px;
+             height: auto;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border: 2px solid white;
+            box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
+            
+          }
+        }
+
+          @media (max-width: 765px)
+        {
+            .title{
+                font-size: 45px;
+            }
+             #jumbo
+          {
+            padding: 10px;
+             height: auto;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border: 2px solid white;
+            box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
+          }
+          .nav-img
+            {
+              width: 40px;
+              height: 40px;
+            }
+        }
+        @media (max-width: 400px)
+        {
+            .title{
+                font-size: 38px;
+                max-width: 22rem;
+            }
+             #jumbo
+          {
+            padding: 10px;
+             height: auto;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            border: 2px solid white;
+            box-shadow: 0 20px 30px 0 rgba(233, 236, 236, 0.3);
+          }
+          .nav-img
+            {
+              width: 40px;
+              height: 40px;
+            }
+        }
+    </style>
+
+
+
+
+
+
+
+
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+  animationEnabled: true,
+  zoomEnabled: true,
+  title:{
+    text: "Sentiment analysis of Tweets"
+  },
+  axisX: {
+    title:"Frequency of tweets",
+    minimum: 0,
+    maximum: 20
+  },
+  axisY:{
+    title: "Rating",
+   // valueFormatString: "$#,##0k"
+  },
+  data: [{
+    type: "scatter",
+  //  toolTipContent: "<b>Area: </b>{x} sq.ft<br/><b>Price: </b>${y}k",
+    dataPoints: [
+      {%for i in size_demo%}
+      {x:{{demo1[i]}},y:{{demo2[i]}}},
+      {% endfor  %}
+     
+     // { x: 2250, y: 0 }
+    ]
+  }]
+});
+chart.render();
+
+}
+</script>
+
+
+
+
+<script>
+    function myFunction() {
+      console.log("myfunction is called");
+      var x = document.getElementById("snackbar");
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 20000);
+      
+    }
+
+  
+</script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+  <script>
+
+  function helpFunction()
+{
+    document.getElementById("Help").click();
+}
+
+function introduction()
+{
+
+console.log("intro called");
+if ('speechSynthesis' in window) {
+
+const intro_speech="You have activated voice interaction. Please say Search and then search Keyword";
+document.getElementById("add_mic").style.color="#03dffc";
+$("#formbox").addClass('clicked');
+speechSynthesis.speak(new SpeechSynthesisUtterance(intro_speech));
+
+
+//speechSynthesis.speak(new SpeechSynthesisUtterance("First , tell me your disease name"));
+voiceactivation();
+
+}else{
+ 
+  alert("Sorry, your browser doesn't support text to speech!");
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+    function voiceactivation()
+    {
+      if (annyang) {
+        // Let's define our first command. First the text we expect, and then the function it should call
+        var commands = {
+          'search *tag': function(variable) {
+            let search_query = document.getElementById("search_query");
+            search_query.value = variable;
+            speechSynthesis.speak(new SpeechSynthesisUtterance("Please conform your search keyword is"+search_query.value));
+
+            speechSynthesis.speak(new SpeechSynthesisUtterance("Now you need select the date. After that say submit to retrieve results"));
+
+
+          },
+          'Submit': function() {
+              document.getElementById("submit").click();
+            }
+        };
+
+        // Add our commands to annyang
+        annyang.addCommands(commands);
+
+        // Start listening. You can call this here, or attach this call to an event, button, etc.
+        annyang.start();
+      }
+    }
+  </script>
+
+
+
+
+
+  </head>
+
+
+<!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Details to trigger Voice Recognition</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="color:teal">
+              <li>Click on <i class="fas fa-microphone fa-2x"></i> Icon in search box for Activating Voice search and fully Voice Automated help.</li>
+              <li>To fill search for disease / medicine section say 'Search "Disease / medicine name" / Fill it manually</li>
+              <li>Fill the date manually from which you want the results.</li>
+              <li>To Search say Search / Click on Search</li>
+              
+              <li style="color: rgb(104, 51, 7);">To get the answers of all your queries on Covid-19 talk to our chatbot by clicking on "Covid Chatbot" In Navbar</li>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  <body style="background-color:rgb(30, 30, 31);">
+ 
+
+
+<nav id="top" class="navbar navbar-expand-lg navbar-dark">
+  <a  class="navbar-brand" href="/"><img class="nav-img" src="https://i.ibb.co/RysHgz0/Logo-Makr-4e-Uz1-U.png"  alt="Cure-Mate"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Compare 2 of your medicines"  href="{{url_for('compare')}}"><b>Comapre Meds</b></a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li class="nav-item">
+        <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Hy there, lets help you with your Covid-19 Quries"  href="{{url_for('chatbot')}}"><b>Covid Chatbot</b></a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Let Us Help YOU">
+        <a style="color: rgb(115, 216, 216);" type="button"  id="Help"  data-toggle="modal" data-target="#exampleModalCenter"><b>Help</b></a>
+      </li>&nbsp;&nbsp;&nbsp;
+    </ul>
+    <a href="/"  style="color:rgb(115, 216, 216);"  data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information">
+    <i class="fa fa-arrow-left"> <b>Go Home</b> </i></a>
+  </div>
+</nav>
+<hr> <br><br><br>
+
+ <div class="header">
+            <form autocomplete="off"  method = "POST" action = "/explore">
+
+               
+                <div class="formbox" id="formbox">
+                    <div class="form-group autocomplete">
+                    <label for="exampleInputEmail1">Search for Disease or Medicine</label>
+                    <input type="text" class="form-control" id="search_query"  placeholder="eg.. disease or medicine name" name ="search_query" style="border-radius:0;width:300px" value="{{request.form.search_query}}" required/>
+
+                    </div>
+                    <div class="form-group autocomplete">
+                    <label for="exampleInputEmail1">From Date:</label>
+                    <input type="date" id="start" class="form-control autocomplete" name="startfrom"  min="2001-01-01" max="2030-12-31" required/>
+                    </div>
+                    <button type="submit" id="submit" onclick="myFunction()" class="btn btn-primary" style="background-color: #eb5b34; border:none; border-radius:0;height:38px"><i class="fa fa-search" id="submit" style="color:white;" ></i> Search</button> &nbsp;&nbsp;
+                      <i style="cursor: pointer; margin-left: 15px;" class="fas fa-microphone fa-2x" id="add_mic" onclick="introduction()"></i>
+
+                </div>
+
+
+            </form>    
+        </div>
+
+
+<div id="snackbar">
+        <div class="spinner-border spinner-border-sm text-warning" role="status">
+          <span class="sr-only">Loading...</span> 
+        </div> Analyzing reviews on twitter and News, might take some time
+    </div>
+
+
+
+
+{%if tweet_sentiments%}
+<div class="container-fluid" id="graphs">   
+  <div class="row">
+
+    <div id="text" class="col-sm-6" style="border: inset;border-radius: 5px;border-color: rgb(129, 127, 127); max-height: 100vh; overflow-y: auto; overflow-x: hidden;" >
+      
+      <table class="table" style=" color: rgb(228, 218, 203); background-color: rgb(0, 0, 0);">
+      <tr>
+            <th style="max-width: 60%;">Results</th>
+            <th >Sentiment</th>
+            </tr>
+      {%for tweet,sentiment in tweet_sentiments%}
+       <tr>
+          <td style="max-width: 60%;"> {{tweet}} </td>
+          <td > {{sentiment}} &nbsp; <i style="color: rgb(53, 158, 158);" class="fa fa-twitter" aria-hidden="true"></i> </td>
+      </tr>
+      {%endfor%}
+      </table>
+      
+    </div>
+
+ <div class="col-sm-6">
+  <h4 style="color: #00c8ff"> Scatter plot for tweets related to the search keyword:</h4>
+<div id="chartContainer" style="height: 400px; width: 100%; margin-top: 30px"></div>
+<br>
+<br>
+<h4> Overview of tweets: </h4>
+<ul>
+<li><h4>{{rev_list_precent[0]}} % of <span style="color:green;margin-left: 10px"> Positive</span> reviews</h4></li>
+
+<li><h4>{{rev_list_precent[1]}} % of <span style="color: red; margin-left: 10px">Negative</span> reviews</h4></li>
+
+
+<li><h4>{{rev_list_precent[2]}} % of <span style="color: #00c8ff;margin-left: 10px">Neutral</span> reviews</h4></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+  </div>
+
+
+</div>
+
+{%endif%}
+    <br>
+    <br>
+
+{%if total_elements%}
+
+<hr><h1 style="text-align: center;"> Latest News </h1><hr>
+
+<div class="container-fluid" id="graphs">   
+  <div class="row">
+{% for index in total_elements  %}
+
+<div class="col-lg-3 col-md-6 col-sm-12">
+<div class="jumbotron "  id="jumbo" style="background-color: black;">
+  <h4 style="font-family: Share Tech Mono, monospace;" >{{title_list[index]}}</h4>
+  <hr class="my-2">
+  <p style="font-family: sans-serif; font-size: 0.8rem;" class="lead">{{description_list[index]}}</p>
+  
+ 
+  <a style="color: rgb(115, 216, 216); text-decoration: none; font-size: 1rem;" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'" class="btn btn-lg" href="{{urls_headlines[index]}}" role="button">Read more</a>
+</div>
+ </div>
+{% endfor %}
+</div>
+</div>
+
+{%endif%}
+
+
+
+ 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+<br><br><br>
+<hr>
+    <footer style="align-items: center; text-align: center;">
+        <h5 style="color: #fff;" >Powered by <a href="https://wit.ai/" target="_blank">wit.ai</a></h5> 
+        <p><a href="#top">Back to Top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>       
+    </footer>
+
+</body>
+</html>

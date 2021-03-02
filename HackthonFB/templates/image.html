@@ -1,0 +1,102 @@
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="32x32"href="https://i.ibb.co/6NDKWyf/Logo-Makr-9m-AUAP.png">
+<title>The Cure-Mate</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<script src="https://kit.fontawesome.com/2f32e53da2.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<style>
+
+    .boxp{
+            width:40%;
+            color:white;
+            padding:20px;
+            height:350px;
+            margin: auto;
+            border:1px solid rgb(152, 154, 158);
+            background-color:rgb(68, 68, 69); 
+          }
+        nav
+        {
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+      hr{
+              background: linear-gradient(
+                  to right,
+                  rgb(104, 103, 102) 0%,
+                  rgba(102,51,153,1) 100%
+
+              );
+              border: 0;
+              height: 1px;
+          }
+        .nav-img
+            {
+              width: 50px;
+              height: 50px;
+            }
+    @media (max-width: 665px)
+        {
+            .boxp{
+                width:100%;
+            }
+            .nav-img
+            {
+              width: 40px;
+              height: 40px;
+            }
+        
+        }
+
+
+</style>
+
+<body style="background-color:#212121;"></body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <a  class="navbar-brand" href="/"><img class="nav-img" src="https://i.ibb.co/RysHgz0/Logo-Makr-4e-Uz1-U.png"  alt="Cure-Mate"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+       <a class="nav-link" data-toggle="tooltip" data-placement="bottom" title=" See Search History" style="color:rgb(115, 216, 216);" href="{{url_for('history')}}">History</a>
+      </li>
+    </ul>
+    <a href="/" class="nav-link" style="color:rgb(115, 216, 216);"  data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information">
+    <i class="fa fa-arrow-left"> <b>Go Home</b> </i></a>
+  </div>
+</nav>
+<hr><br><br>
+<div class="boxp">
+  <div style="text-align:center">
+    <form action="/action_page.php">
+        <label for="myfile">Select a Medical condition:</label><br>
+        <input type="file" id="myfile" name="myfile"><br><br>
+        <input type="submit">
+    </form>
+  </div>
+</div>
+
+
+<br><br><br>
+<hr>
+    <footer style="align-items: center; text-align: center;">
+        <h5 style="color: #fff;">Powered by <a href="https://wit.ai/" target="_blank">wit.ai</a></h5>       
+    </footer>
+</body>

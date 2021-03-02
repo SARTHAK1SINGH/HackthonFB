@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/6NDKWyf/Logo-Makr-9m-AUAP.png">
+    <title>The Cure-Mate</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/2f32e53da2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+
+<!--- CDN for html to Pdf converter-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+
+<script type="text/javascript">
+
+    function CreatePDFfromHTML() {
+
+    var HTML_Width = $(".html-content").width();
+    var HTML_Height = $(".html-content").height();
+    var top_left_margin = 15;
+    var PDF_Width = HTML_Width + (top_left_margin * 2);
+    var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+    var canvas_image_width = HTML_Width;
+    var canvas_image_height = HTML_Height;
+
+    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+    html2canvas($(".html-content")[0]).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+        for (var i = 1; i <= totalPDFPages; i++) {
+            pdf.addPage(PDF_Width, PDF_Height);
+            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+        }
+        pdf.save("MedsResult.pdf");
+    });
+}
+
+</script>
+<!--cdn file chart js-->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static',filename='styles/result.css')}}">
+
+
+<style>
+    .title h4{
+        font-family: "Share Tech Mono", monospace;
+        text-align: center;
+    }
+    #top
+        {
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        .nav-img
+            {
+              width: 50px;
+              height: 50px;
+            }
+
+        @media (max-width: 665px)
+        {
+            .nav-img
+            {
+              width: 40px;
+              height: 40px;
+            }
+        }
+</style>
+</head>
+
+<!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle" style="color:black">Understand Results</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" style="color:teal">
+              <li>Is your medicine is suitable for your condition or not.</li>
+              <li>What are other medicines that are good for your condition.</li>
+              <li>Is the medicines you are currently taking, can cure some other conditions too.</li>
+              <li>Analysis of user reviews based on sentiments using WIT.AI to grab the information about positive and negative review.</li>
+              <li>Download your result in PDF through Top "Download result's PDF" Button</li>
+              <li>Go to history to see your past searches and watch out your results again.</li>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<body style="background-color: #212121;"> 
+
+<div class='html-content'>
+    <div class="landing-page">
+
+<!-- nav-bar top -->
+
+        <nav id="top" class="navbar navbar-expand-lg navbar-dark">
+        <a  class="navbar-brand" href="/"><img class="nav-img" src="https://i.ibb.co/RysHgz0/Logo-Makr-4e-Uz1-U.png"  alt="Cure-Mate"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                 <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title=" See Search History" class="nav-link" href="{{url_for('history')}}">History</a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Let Us Help YOU">
+                <a style="color: rgb(115, 216, 216);" type="button" id="Help" class="nav-link" data-toggle="modal" data-target="#exampleModalCenter">Help</a>
+            </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0"></form>
+            <a style="color: rgb(115, 216, 216); cursor: pointer;" data-toggle="tooltip" data-placement="bottom" title="Download the result page" onclick = "CreatePDFfromHTML()" class="nav-link"> <i class="fa fa-arrow-down" aria-hidden="true"></i> Download Result's PDF</a>
+            
+            <a style="color: rgb(115, 216, 216);" data-toggle="tooltip" data-placement="bottom" title="Let's Give you another Information" href = "/" class="nav-link"> <i class="fa fa-arrow-left"> <b>Go Home</b> </i></a>
+            
+            <a href="{{url_for('profile')}}" data-toggle="tooltip" data-placement="bottom" title="Log Out">
+            <img src="{{picture}}" alt="profile picture" width="45px" style="border-radius: 40%">
+            </a>
+        </div>
+        </nav>
+        <hr>
+
+
+<!-- data result -->
+        <div class="title" style="background-color: rgb(24, 22, 22);">
+            <h2>Results for condition <span style="color: red">{{search_disease}} </span> and <span style="color:green">{{search_medicine}} </span> medicine that you enterd as you are using </h2>
+            <h4> <a class="ahover" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'"  style="color: rgb(115, 216, 216); text-decoration: none;" href="#statistics">See Stastistics</a> | <a class="ahover" onMouseOver="this.style.color='#f07f1d'" onMouseOut="this.style.color='#3dd1c5'" style="color: rgb(115, 216, 216); text-decoration: none;" href="#graphs">See Graphs</a> </h4>
+            </div>
+         <div class="dismed"> 
+            <div class="disdic has-margin-right ">
+                <div class="title-heading">
+                    <h2>{{search_disease}}</h2>
+                    <p>Your mentioned Disease can be cured by following drugs (Based on Rating by Users): </p>
+                </div>
+                <div class="listul">
+                    <ul id="ullist">
+                <!-- loop one for multiple display -->
+                    {% for i,j in suitable_other_meds %}
+                    <li> {{j}} ({{i}}) |</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                   
+            </div>
+            <div class="meddisc">
+                    <div class="title-heading">
+                    <h2>{{search_medicine}}</h2>
+                    <p>Your mentioned Medicines can cure the following disease: </p>
+                </div> 
+
+                <div class="listul">
+                    <ul id="ullist">
+                <!-- loop one for multiple display -->
+
+                    {% for i,j in suitable_other_desease %}
+                    <li> {{j}} ({{i}})|</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+        </div>   
+
+
+<!-- suitable percentage -->
+        <div class="suitable">
+            {% if suitable_rating > 7 %}
+            <h4 style="color:green"> Your medicine is suitable for your condition with average rating of {{suitable_rating}}</h4>
+            {% else %}
+            <h4 style="color:red">Your medicine/drug is not appropriate for you condition.</h4>
+            {% endif %}
+        </div>
+    
+
+
+<!-- data analaysis percentage with colour -->
+
+    <div class="dataana" style="background-color: rgb(22, 21, 21);">
+
+        <table class="dataanaa" style="width: 100%;">
+            <tr>
+            <th>Total Analyzed</th>
+            <th>Negative Sentiment</th>
+            <th>Neutral Sentiment</th>
+            <th>Positive Sentiment</th>
+            </tr>
+
+            <tr>
+            <td>{{total_sentiments}}</td>
+            <td style="color: rgb(163, 16, 16);">{{negative_sentiments}} %</td>
+            <td style="color: rgb(122, 106, 106);">{{neutral_sentiments}} %</td>
+            <td style="color: rgb(7, 102, 55);">{{positive_sentiments}} %</td>
+            </tr>
+        </table>
+    </div>
+
+<br><br><br>
+
+<!-- graph Section -->
+
+    <!-- bar graph -->
+
+    <div class="container-fluid" id="graphs">   
+        <div class="row">
+            <div class="col-sm-6">
+            <canvas id="graph1" width="350" height="400"></canvas>
+            </div>
+            
+            <div class="col-sm-6">
+            <canvas id="graph2" width="350" height="450"></canvas>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <!-- other 2 graph -->
+
+
+
+
+        <!-- sentiment Analysis table-->
+    <table class="table table-dark"  id="statistics">
+        <thead>
+            <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Content</th>
+            <th scope="col">Sentiment</th>
+            <th scope="col">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review,date,sentiment,rating in reviews %}
+            <tr>
+            <td>{{date}}</td>
+            <td>{{review}}</td>
+            <td>{{sentiment}}</td>
+            <td>{{rating}}</td>
+            </tr>
+              {% endfor %}  
+            {% if reviews == [] %}
+            <tr>No data to display for your search in table</tr>
+            {%endif%}
+        </tbody>
+    </table>
+
+
+<!-- very neg / very pos section -->
+    <div class="suitable">
+        <h4 style="color: rgb(145, 9, 9);">Most Negative</h4>  
+        <hr>
+        <h4 style="color: rgb(145, 9, 9);">{{most_negative_review}}</h4>
+    </div>
+    <div class="suitable">
+        <h4 style="color: rgb(6, 94, 3);">Most Positive</h4> 
+        <hr>
+        <h4 style="color: rgb(6, 94, 3);">{{most_positive_review}}</h4>
+    </div>
+<!-- foooter section -->
+<hr>
+    <footer style="align-items: center; text-align: center;">
+        <h5>Powered by <a href="https://wit.ai/" target="_blank">wit.ai</a></h5> 
+        <p><a href="#top">Back to Top <i class="fa fa-arrow-up" aria-hidden="true"></i></a></p>       
+    </footer>
+
+</div>
+
+<script>
+    var ctx = document.getElementById('graph1').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ["Positive","Negative","Neutral"],
+            datasets: [{
+                label: "Graphical analysis of reviews",
+                backgroundColor: "rgba(3,161,186,1)",
+      borderColor: "rgba(3,21,186,1)",
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+      pointHoverBorderColor: "rgba(220,220,220,1)",
+       pointHoverBorderWidth: 2,
+                data:{{p}},
+            }]
+        },
+
+
+        options: {
+        responsive: false,
+        maintainAspectRatio: false,
+
+
+         legend: {
+
+            display:true,
+            labels:{
+                fontColor: 'rgb(255,255,255)'
+            }
+        }
+        // Configuration options go here
+        }
+    });
+    </script>
+
+
+<script>
+
+  var ctx = document.getElementById('graph2').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: [ {% for item in suitable_other_meds_name %}
+                "{{item}}",
+
+                {% endfor %} ,
+
+
+            ],
+            datasets: [{
+                label: "Other medicines for this disease are:",
+                backgroundColor: "rgba(3,161,186,1)",
+                borderColor: "rgba(3,21,186,1)",
+
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 2,
+                data: [
+                 {% for item in suitable_other_meds_rating %}
+                   {{item}},
+                   {% endfor %}
+                ],
+            }]
+        },
+
+
+        options: {
+        responsive: false,
+        maintainAspectRatio: false,
+        legend: {
+
+            display:true,
+            labels:{
+                fontColor: 'rgb(255,255,255)'
+            }
+        }
+        // Configuration options go here
+        }
+    });
+
+
+    </script>
+
+
+</div>
+</body>
+</html>
